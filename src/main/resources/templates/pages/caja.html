@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/base-con-menu :: layout(~{::title}, ~{::cuerpo}, ~{::link})}"
+>
+  <head>
+    <title>Configuración de Caja</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
+    />
+  </head>
+
+  <body class="d-flex">
+    <th:block th:fragment="cuerpo">
+      <main class="main">
+        <div class="box">
+          <div class="header-info">
+            <h2 class="mb-3">Configuración de Cajas</h2>
+          </div>
+
+          <hr class="separator" />
+
+          <div class="body-info">
+            <table
+              id="tablaCaja"
+              class="table display"
+              style="width: 100%"
+              aria-describedby="Tabla de Cajas"
+            >
+              <thead class="align-middle">
+                <th>Código</th>
+              </thead>
+
+              <tbody>
+                <tr th:each="caja:${listaCaja}" class="align-middle">
+                  <td th:text="${caja.id}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <template th:insert="~{/fragments/modal-template}" id="modal-template">
+      </template>
+
+      <!-- Custom JavaScript -->
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+      <script
+        src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"
+      ></script>
+      <script
+        src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.js"
+      ></script>
+      <script
+        src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"
+      ></script>
+
+      <script type="module" src="/js/caja.js"></script>
+    </th:block>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+/* --------------------- MODIFICACIONES DE VARIABLES DE BOOTSTRAP --------------------- */
+:root {
+  --primary-color: #0d6efd;
+  --secondary-color: #5197ff;
+  --white-color: #ffffff;
+  --link-color: #0094ff;
+}
+
+/* --------------------- TIPOGRAF�A --------------------- */
+*,
+*::after,
+*::before {
+  font-family: "Raleway", sans-serif;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+body {
+  min-height: 100svh;
+  background-color: rgb(238, 242, 246);
+}
+
+/* --------------------- MODIFICACIONES DE CLASES DE BOOTSTRAP --------------------- */
+.nav-item > a {
+  padding-left: 2.5rem;
+}
+
+/* -------- COLORES DE TEXTOS -------- */
+.text-link {
+  color: var(--link-color);
+}
+
+/* -------- FORMULARIOS -------- */
+
+.form-control,
+.form-select {
+  border: 1px solid var(--secondary-color);
+}
+
+/* -------- MODALES -------- */
+.modal-header {
+  border: none;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.modal-header > button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: var(--primary-color);
+  font-size: 2rem;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.modal-body {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.modal-footer {
+  border: none;
+  flex-wrap: nowrap;
+}
+
+/* -------- ENLACE -------- */
+a {
+  cursor: pointer;
+  color: var(--link-color);
+  transition: color 300ms ease-in-out;
+}
+
+/* --------------------- CLASES �NICAS Y GENERALES --------------------- */
+.icon {
+  font-size: 4rem;
+}
+
+.header-info > button > * {
+  vertical-align: middle;
+}
+
+/* -------- MAIN -------- */
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 1rem;
+  min-width: 0%;
+}
+
+/* -------- CAJA GENERAL -------- */
+.box {
+  background-color: var(--white-color);
+  padding: 1rem;
+  border-radius: 17px;
+}
+
+/* -------- PARA EL CUERPO DE INFORMACI�N -------- */
+.body-info {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* -------- �CONOS DE OPERACIONES CRUD -------- */
+.icon-action {
+  cursor: pointer;
+  font-size: 1.5rem;
+  transition: opacity 300ms ease-in-out;
+}
+
+.icon-action:hover {
+  opacity: 0.75;
+}
+
+.icon-dollar,
+.icon-dolar:hover {
+  color: var(--bs-green) !important;
+}
+
+.icon-info,
+.icon-info:hover {
+  color: var(--link-color) !important;
+}
+
+.icon-update,
+.icon-update:hover {
+  color: var(--bs-yellow);
+}
+
+.icon-delete,
+.icon-delete:hover {
+  color: var(--bs-red);
+}
+
+/* -------- Imagen de Platos -------- */
+.container-img-dish {
+  text-align: center;
+}
+
+.container-img-dish > .img-dish {
+  border: 1px solid var(--secondary-color);
+}
+
+.img-dish {
+  display: inline-block;
+  text-align: center;
+  width: 160px;
+  height: 160px;
+}
+
+.img-dish > img {
+  height: -webkit-fill-available;
+}
+
+
+
+		
+@media screen and (min-width: 800px) {
+  .border-custom{
+		border-left: 1px solid #333;
+	}
+}	
+
+
+.container-cards::-webkit-scrollbar {
+  width: 6px;
+}
+
+.container-cards::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.container-cards::-webkit-scrollbar-thumb {
+  background-color: #dcdcdc;
+  border-radius: 3px;
+}
+
+.container-cards::-webkit-scrollbar-thumb:hover {
+  background-color: #c0c0c0;
+}

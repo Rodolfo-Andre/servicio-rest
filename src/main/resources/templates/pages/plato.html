@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html
+  lang="es"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{layouts/base-con-menu :: layout(~{::title}, ~{::cuerpo}, ~{::link})}"
+>
+  <head>
+    <title>Configuración de Plato</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"
+    />
+  </head>
+
+  <body class="d-flex">
+    <th:block th:fragment="cuerpo">
+      <main class="main">
+        <div class="box">
+          <div class="header-info">
+            <h2 class="mb-3">Configuración de Platos</h2>
+          </div>
+
+          <hr class="separator" />
+
+          <div class="body-info">
+            <table
+              id="tablaPlato"
+              class="table display"
+              style="width: 100%"
+              aria-describedby="Tabla de Patos"
+            >
+              <thead class="align-middle">
+                <th>Código</th>
+                <th>Plato</th>
+                <th>Imagen</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+              </thead>
+              <tbody>
+                <tr th:each="plato : ${listaPlato}" class="align-middle">
+                  <td th:text="${plato.id}"></td>
+                  <td th:text="${plato.nombre}"></td>
+                  <td>
+                    <div style="width: 200px">
+                      <img
+                        style="width: 100px; height: 100px"
+                        th:src="${plato.imagen}"
+                        th:alt="${plato.nombre}"
+                      />
+                    </div>
+                  </td>
+                  <td th:text="${plato.precioPlato}"></td>
+                  <td th:text="${plato.categoriaPlato.nombre}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+
+      <template th:insert="~{/fragments/modal-template}" id="modal-template">
+      </template>
+
+      <!-- Custom JavaScript -->
+      <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"
+        integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+      ></script>
+      <script
+        src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"
+      ></script>
+      <script
+        src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.js"
+      ></script>
+      <script
+        src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"
+      ></script>
+
+      <script type="module" src="/js/plato.js"></script>
+    </th:block>
+  </body>
+</html>
