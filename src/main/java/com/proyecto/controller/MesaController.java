@@ -3,8 +3,8 @@ package com.proyecto.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.MediaType;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.proyecto.entity.Mesa;
@@ -12,18 +12,18 @@ import com.proyecto.entity.UsuarioDetallesCustom;
 import com.proyecto.interfaces.UsuarioActual;
 import com.proyecto.service.MesaService;
 
-@Controller
+@RestController
 @RequestMapping(value = "/configuracion/mesa")
 public class MesaController {
   @Autowired
   MesaService mesaService;
-
-  @GetMapping(value = "")
-  public String index(Model model) {
-    model.addAttribute("listaMesas", mesaService.obtenerTodo());
-    return "pages/mesas";
+  
+  @GetMapping(value ="/lista", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Mesa> lista(){
+	  return mesaService.obtenerTodo();
   }
 
+  
   @GetMapping(value = "/obtener")
   @ResponseBody
   public List<Mesa> getMesas(@UsuarioActual UsuarioDetallesCustom usuario) {

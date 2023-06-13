@@ -5,8 +5,10 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 @Entity
+
 @Table(name = "MESA")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+
 public class Mesa {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
