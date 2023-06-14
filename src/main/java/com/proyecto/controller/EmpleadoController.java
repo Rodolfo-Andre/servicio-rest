@@ -1,8 +1,6 @@
 package com.proyecto.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +26,7 @@ public class EmpleadoController {
   @GetMapping(value = "")
   public String index(Model model) {
     model.addAttribute("listar", empleadoService.listarEmpleado());
+    System.out.println(passwordEncoder.encode("HOLA"));
     return "pages/empleado";
   }
 

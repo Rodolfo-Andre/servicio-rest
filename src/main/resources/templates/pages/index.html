@@ -15,12 +15,7 @@
         <div
           class="d-flex flex-column justify-content-center align-items-center text-center px-3 gap-3"
         >
-          <h1 class="display-3">
-            Bienvenido al Sistema -
-            <th:block
-              th:text="${#authentication.principal.usuario.empleado.nombre}"
-            ></th:block>
-          </h1>
+          <h1 class="display-3">Bienvenido al Sistema - Usuario</h1>
 
           <div style="max-width: 400px">
             <img th:src="@{/images/home.jpg}" alt="Inicio" />
