@@ -1,8 +1,6 @@
 package com.proyecto.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -28,6 +26,7 @@ public class EmpleadoController {
   @GetMapping(value = "")
   public String index(Model model) {
     model.addAttribute("listar", empleadoService.listarEmpleado());
+    System.out.println(passwordEncoder.encode("HOLA"));
     return "pages/empleado";
   }
 
@@ -37,46 +36,13 @@ public class EmpleadoController {
     return empleadoService.obtenerxId(id);
   }
 
-  @RequestMapping(value = "/registrar")
-  public String registrar(@RequestParam("nameEmpleado") String nombre,
-      @RequestParam("lastnameEmpleado") String apellido,
-      @RequestParam("telefono") String telefono,
-      @RequestParam("dni") String dni,
-      @RequestParam("cargo") int cargo,
-      @RequestParam("correo") String correo,
-      RedirectAttributes redirect) {
-    try {
-      Empleado e = new Empleado();
-      String contrasenia = Empleado.generarContrasenia(apellido);
-      e.setNombre(nombre);
-      e.setApellido(apellido);
-      e.setDni(dni);
-      e.setTelefono(telefono);
+  @PostMapping(value = "/registrar")
+  public Usuario registrar(@RequestBody Empleado empleado, @RequestBody Usuario usuario) {
 
-      Cargo c = new Cargo();
-      c.setId(cargo);
-
-      e.setCargo(c);
-
-      Usuario u = new Usuario();
-
-      u.setContrasena(passwordEncoder.encode(contrasenia));
-      u.setCorreo(correo);
-
-      e.setUsuario(u);
-
-      System.out.println("LA CONTRASEÑA GENERADA ES: " + contrasenia);
-
-      empleadoService.registrar(e);
-      redirect.addFlashAttribute("mensaje", "Empleado registrado correctamente");
-      redirect.addFlashAttribute("tipo", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      redirect.addFlashAttribute("mensaje", "Error al registrar empleado");
-      redirect.addFlashAttribute("tipo", "error");
-    }
-
-    return "redirect:/configuracion/empleado";
+      empleadoService.registrar(empleado);
+      usuario.setContrasena(passwordEncoder.encode(usuario.getContrasena()));
+      usuarioService.agregar(usuario);
+      return usuario;
   }
 
   @PostMapping(value = "/actualizar")
