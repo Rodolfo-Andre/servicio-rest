@@ -27,10 +27,27 @@ public class Comprobante {
   @Column(name = "DESCUENTO_TOTAL")
   private double descuento;
 
-  @ManyToOne
-  @JoinColumn(name = "CLIENTE_ID")
-  private Cliente cliente;
+  private String nombreCliente;
 
+  public String getNombreCliente() {
+	return nombreCliente;
+}
+
+public void setNombreCliente(String nombreCliente) {
+	this.nombreCliente = nombreCliente;
+}
+
+public MetodoPago getMetodopago() {
+	return metodopago;
+}
+
+public void setMetodopago(MetodoPago metodopago) {
+	this.metodopago = metodopago;
+}
+
+@ManyToOne
+  @JoinColumn(name = "METODO_PAGO_ID")
+  private MetodoPago metodopago;
 
   @ManyToOne
   @JoinColumn(name = "TIPO_COMPROBANTE_ID")
@@ -47,9 +64,6 @@ public class Comprobante {
   @ManyToOne
   @JoinColumn(name = "CAJA_ID")
   private Caja caja;
-
-  @OneToMany(mappedBy = "comprobante")
-  private List<DetalleComprobante> listaDetalleComprobante;
 
   public Integer getId() {
     return id;
@@ -99,14 +113,6 @@ public class Comprobante {
     this.descuento = descuento;
   }
 
-  public Cliente getCliente() {
-    return cliente;
-  }
-
-  public void setCliente(Cliente cliente) {
-    this.cliente = cliente;
-  }
-
   public TipoComprobante getTipoComprobante() {
     return tipoComprobante;
   }
@@ -133,14 +139,6 @@ public class Comprobante {
 
   public Caja getCaja() {
     return caja;
-  }
-
-  public List<DetalleComprobante> getListaDetalleComprobante() {
-    return listaDetalleComprobante;
-  }
-
-  public void setListaDetalleComprobante(List<DetalleComprobante> listaDetalleComprobante) {
-    this.listaDetalleComprobante = listaDetalleComprobante;
   }
 
   public void setCaja(Caja caja) {

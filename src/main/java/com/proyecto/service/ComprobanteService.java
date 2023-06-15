@@ -6,9 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.proyecto.dao.ComprobanteRepository;
-import com.proyecto.dao.DetalleComprobanteRepository;
 import com.proyecto.entity.Comprobante;
-import com.proyecto.entity.DetalleComprobante;
+
 
 @Service
 public class ComprobanteService {
@@ -16,8 +15,7 @@ public class ComprobanteService {
     @Autowired
     private ComprobanteRepository repository;
 
-    @Autowired
-    private DetalleComprobanteRepository detalleComprobanteRepository;
+    
 
     public Comprobante registrar(Comprobante d) {
         return repository.save(d);
@@ -39,10 +37,7 @@ public class ComprobanteService {
         return repository.findAll();
     }
 
-    public DetalleComprobante registrarDetalle(DetalleComprobante d) {
-        return detalleComprobanteRepository.save(d);
-    }
-    
+ 
     
     
 

@@ -14,9 +14,17 @@ public class MetodoPago {
 
   private String metodo;
 
-  @OneToMany(mappedBy = "metodoPago")
+  public List<Comprobante> getListComprobante() {
+	return listComprobante;
+}
+
+public void setListComprobante(List<Comprobante> listComprobante) {
+	this.listComprobante = listComprobante;
+}
+
+@OneToMany(mappedBy = "metodopago")
   @JsonIgnore
-  private List<DetalleComprobante> comprobante;
+  private List<Comprobante> listComprobante;
 
   public MetodoPago() {
   }
@@ -41,11 +49,4 @@ public class MetodoPago {
     this.metodo = metodo;
   }
 
-  public List<DetalleComprobante> getComprobante() {
-    return comprobante;
-  }
-
-  public void setComprobante(List<DetalleComprobante> comprobante) {
-    this.comprobante = comprobante;
-  }
 }

@@ -24,8 +24,6 @@ public class DatabaseLoader implements CommandLineRunner {
   @Autowired
   private EstablecimientoService establecimientoService;
   @Autowired
-  private ClienteService clienteService;
-  @Autowired
   private PasswordEncoder passwordEncoder;
 
   @Override
@@ -75,14 +73,7 @@ public class DatabaseLoader implements CommandLineRunner {
       tipoComprobanteService.agregar(new TipoComprobante("Boleta"));
     }
 
-    if (clienteService.obtenerTamano() == 0) {
-      Cliente cliente = new Cliente();
-      cliente.setNombre("Cliente");
-      cliente.setApellido("");
-      cliente.setDni("");
-
-      clienteService.agregar(cliente);
-    }
+ 
 
     if (usuarioService.obtenerTamano() == 0) {
       Cargo administrador = cargoService.obtenerPorNombre("ROLE_ADMINISTRADOR");
