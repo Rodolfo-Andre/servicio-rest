@@ -1,7 +1,6 @@
 package com.proyecto.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,8 +14,6 @@ class EmpleadoRestController {
 	@Autowired
 	EmpleadoService empleadoService;
 
-	@Autowired
-	PasswordEncoder passwordEncoder;
 
 	@Autowired
 	UsuarioService usuarioService;
@@ -28,12 +25,14 @@ class EmpleadoRestController {
 
 	@PutMapping(value = "/actualizar")
 	public void actualizar(@RequestBody Empleado emple) {
+		System.out.println("ACSAD" + emple);
 		empleadoService.actualizar(emple);
 		
 	}
 
 	@DeleteMapping(value = "/eliminar/{codigo}")
 	public void eliminar(@PathVariable("codigo") Integer cod) {
+		System.out.println("ACSAD");
 		empleadoService.eliminar(cod);
 	}
 }

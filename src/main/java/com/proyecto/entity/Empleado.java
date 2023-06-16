@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "EMPLEADO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Empleado {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
