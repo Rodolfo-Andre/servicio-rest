@@ -1,10 +1,10 @@
 package com.proyecto.controller;
 
 import com.proyecto.entity.Caja;
-import com.proyecto.entity.Cliente;
+
 import com.proyecto.entity.Comanda;
 import com.proyecto.entity.Comprobante;
-import com.proyecto.entity.DetalleComprobante;
+
 import com.proyecto.entity.EstadoComanda;
 import com.proyecto.entity.MetodoPago;
 import com.proyecto.entity.TipoComprobante;
@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.proyecto.service.ClienteService;
 import com.proyecto.service.ComandaService;
 import com.proyecto.service.ComprobanteService;
 import com.proyecto.service.EmpleadoService;
@@ -36,9 +35,6 @@ public class ComprobanteController {
 
   @Autowired
   TipoComprobanteService tipoComprobanteService;
-
-  @Autowired
-  ClienteService clienteService;
 
   @Autowired
   ComandaService comandaService;
