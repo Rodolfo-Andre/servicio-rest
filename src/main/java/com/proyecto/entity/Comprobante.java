@@ -29,23 +29,7 @@ public class Comprobante {
 
   private String nombreCliente;
 
-  public String getNombreCliente() {
-	return nombreCliente;
-}
-
-public void setNombreCliente(String nombreCliente) {
-	this.nombreCliente = nombreCliente;
-}
-
-public MetodoPago getMetodopago() {
-	return metodopago;
-}
-
-public void setMetodopago(MetodoPago metodopago) {
-	this.metodopago = metodopago;
-}
-
-@ManyToOne
+  @ManyToOne
   @JoinColumn(name = "METODO_PAGO_ID")
   private MetodoPago metodopago;
 
@@ -64,6 +48,22 @@ public void setMetodopago(MetodoPago metodopago) {
   @ManyToOne
   @JoinColumn(name = "CAJA_ID")
   private Caja caja;
+
+  public String getNombreCliente() {
+    return nombreCliente;
+  }
+
+  public void setNombreCliente(String nombreCliente) {
+    this.nombreCliente = nombreCliente;
+  }
+
+  public MetodoPago getMetodopago() {
+    return metodopago;
+  }
+
+  public void setMetodopago(MetodoPago metodopago) {
+    this.metodopago = metodopago;
+  }
 
   public Integer getId() {
     return id;

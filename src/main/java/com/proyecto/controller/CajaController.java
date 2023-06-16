@@ -33,21 +33,8 @@ public class CajaController {
 
   @PostMapping(value = "/grabar")
   public String grabar(RedirectAttributes redirect) {
-    try {
-      Caja caja = new Caja();
-      caja.setEstablecimiento(establecimientoService.obtenerPrimero());
-
-      cajaservice.agregar(caja);
-
-      redirect.addFlashAttribute("mensaje", "Caja registrada correctamente");
-      redirect.addFlashAttribute("tipo", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      redirect.addFlashAttribute("mensaje", "Error al registrar caja");
-      redirect.addFlashAttribute("tipo", "error");
-    }
-
-    return "redirect:/configuracion/caja";
+	  /*Aca lo cambiaas cracks aunque lo tienes q modificar todo equisde*/
+    return "";
   }
 
   @PostMapping(value = "/eliminar")

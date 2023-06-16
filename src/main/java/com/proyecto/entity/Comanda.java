@@ -81,6 +81,7 @@ public class Comanda {
   public Empleado getEmpleado() {
     return empleado;
   }
+  
 
   public void setEmpleado(Empleado empleado) {
     this.empleado = empleado;
