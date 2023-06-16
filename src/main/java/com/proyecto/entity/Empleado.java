@@ -23,9 +23,7 @@ public class Empleado {
   private String dni;
 
   @Column(name = "FECHA_REGISTRO", nullable = false, updatable = false)
-  @Temporal(TemporalType.TIMESTAMP)
-  @CreatedDate
-  private Date fechaRegistro = new Date();
+  private String fechaRegistro;
 
   @ManyToOne
   @JoinColumn(name = "CARGO_ID")
@@ -83,11 +81,11 @@ public class Empleado {
     this.dni = dni;
   }
 
-  public Date getFechaRegistro() {
+  public String getFechaRegistro() {
     return fechaRegistro;
   }
 
-  public void setFechaRegistro(Date fechaRegistro) {
+  public void setFechaRegistro(String fechaRegistro) {
     this.fechaRegistro = fechaRegistro;
   }
 

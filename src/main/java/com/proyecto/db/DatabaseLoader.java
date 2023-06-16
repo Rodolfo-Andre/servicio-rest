@@ -1,5 +1,8 @@
 package com.proyecto.db;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -9,179 +12,190 @@ import com.proyecto.service.*;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
-  @Autowired
-  private UsuarioService usuarioService;
-  @Autowired
-  private CargoService cargoService;
-  @Autowired
-  private MetodoPagoService metodoPagoService;
-  @Autowired
-  private CategoriaPlatoService categoriaPlatoService;
-  @Autowired
-  private EstadoComandaService estadoComandaService;
-  @Autowired
-  private TipoComprobanteService tipoComprobanteService;
-  @Autowired
-  private EstablecimientoService establecimientoService;
-  @Autowired
-  private ClienteService clienteService;
-  @Autowired
-  private PasswordEncoder passwordEncoder;
+	@Autowired
+	private UsuarioService usuarioService;
+	@Autowired
+	private CargoService cargoService;
+	@Autowired
+	private MetodoPagoService metodoPagoService;
+	@Autowired
+	private CategoriaPlatoService categoriaPlatoService;
+	@Autowired
+	private EstadoComandaService estadoComandaService;
+	@Autowired
+	private TipoComprobanteService tipoComprobanteService;
+	@Autowired
+	private EstablecimientoService establecimientoService;
+	@Autowired
+	private ClienteService clienteService;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
-  @Override
-  public void run(String... args) throws Exception {
-    if (establecimientoService.obtenerTamano() == 0) {
-      Establecimiento establecimiento = new Establecimiento();
-      establecimiento.setId("ES-01");
-      establecimiento.setDireccion("Av.Izaguirre");
-      establecimiento.setNombre("Sangunchería Wong");
-      establecimiento.setTelefono("942850902");
-      establecimiento.setRuc("20509311412");
+	@Override
+	public void run(String... args) throws Exception {
 
-      establecimientoService.agregar(establecimiento);
-    }
+		Date fechaActual = new Date();
+		String formato = "dd/MM/yyyy";
+		SimpleDateFormat sdf = new SimpleDateFormat(formato);
+		String fechaString = sdf.format(fechaActual);
+		
+		if (establecimientoService.obtenerTamano() == 0) {
+			Establecimiento establecimiento = new Establecimiento();
+			establecimiento.setId("ES-01");
+			establecimiento.setDireccion("Av.Izaguirre");
+			establecimiento.setNombre("Sangunchería Wong");
+			establecimiento.setTelefono("942850902");
+			establecimiento.setRuc("20509311412");
 
-    if (cargoService.obtenerTamano() == 0) {
-      cargoService.agregar(new Cargo("ROLE_ADMINISTRADOR"));
-      cargoService.agregar(new Cargo("ROLE_MESERO"));
-      cargoService.agregar(new Cargo("ROLE_CAJERO"));
-      cargoService.agregar(new Cargo("ROLE_COCINERO"));
-      cargoService.agregar(new Cargo("ROLE_GERENTE"));
-    }
+			establecimientoService.agregar(establecimiento);
+		}
 
-    if (metodoPagoService.obtenerTamano() == 0) {
-      metodoPagoService.agregar(new MetodoPago("En efectivo"));
-      metodoPagoService.agregar(new MetodoPago("BCP"));
-      metodoPagoService.agregar(new MetodoPago("BBVA"));
-      metodoPagoService.agregar(new MetodoPago("Scotiabank"));
-      metodoPagoService.agregar(new MetodoPago("Interbank"));
-    }
+		if (cargoService.obtenerTamano() == 0) {
+			cargoService.agregar(new Cargo("ADMINISTRADOR"));
+			cargoService.agregar(new Cargo("MESERO"));
+			cargoService.agregar(new Cargo("CAJERO"));
+			cargoService.agregar(new Cargo("COCINERO"));
+			cargoService.agregar(new Cargo("GERENTE"));
+		}
 
-    if (categoriaPlatoService.obtenerTamano() == 0) {
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-01", "Bebidas"));
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-02", "Hamburguesas"));
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-03", "Postres"));
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-04", "Sopas"));
-    }
+		if (metodoPagoService.obtenerTamano() == 0) {
+			metodoPagoService.agregar(new MetodoPago("En efectivo"));
+			metodoPagoService.agregar(new MetodoPago("BCP"));
+			metodoPagoService.agregar(new MetodoPago("BBVA"));
+			metodoPagoService.agregar(new MetodoPago("Scotiabank"));
+			metodoPagoService.agregar(new MetodoPago("Interbank"));
+		}
 
-    if (estadoComandaService.obtenerTamano() == 0) {
-      estadoComandaService.agregar(new EstadoComanda("Generado"));
-      estadoComandaService.agregar(new EstadoComanda("Preparado"));
-      estadoComandaService.agregar(new EstadoComanda("Pagado"));
-    }
+		if (categoriaPlatoService.obtenerTamano() == 0) {
+			categoriaPlatoService.agregar(new CategoriaPlato("CP-01", "Bebidas"));
+			categoriaPlatoService.agregar(new CategoriaPlato("CP-02", "Hamburguesas"));
+			categoriaPlatoService.agregar(new CategoriaPlato("CP-03", "Postres"));
+			categoriaPlatoService.agregar(new CategoriaPlato("CP-04", "Sopas"));
+		}
 
-    if (tipoComprobanteService.obtenerTamano() == 0) {
-      tipoComprobanteService.agregar(new TipoComprobante("Factura"));
-      tipoComprobanteService.agregar(new TipoComprobante("Boleta"));
-    }
+		if (estadoComandaService.obtenerTamano() == 0) {
+			estadoComandaService.agregar(new EstadoComanda("Generado"));
+			estadoComandaService.agregar(new EstadoComanda("Preparado"));
+			estadoComandaService.agregar(new EstadoComanda("Pagado"));
+		}
 
-    if (clienteService.obtenerTamano() == 0) {
-      Cliente cliente = new Cliente();
-      cliente.setNombre("Cliente");
-      cliente.setApellido("");
-      cliente.setDni("");
+		if (tipoComprobanteService.obtenerTamano() == 0) {
+			tipoComprobanteService.agregar(new TipoComprobante("Factura"));
+			tipoComprobanteService.agregar(new TipoComprobante("Boleta"));
+		}
 
-      clienteService.agregar(cliente);
-    }
+		if (clienteService.obtenerTamano() == 0) {
+			Cliente cliente = new Cliente();
+			cliente.setNombre("Cliente");
+			cliente.setApellido("");
+			cliente.setDni("");
 
-    if (usuarioService.obtenerTamano() == 0) {
-      Cargo administrador = cargoService.obtenerPorNombre("ROLE_ADMINISTRADOR");
+			clienteService.agregar(cliente);
+		}
 
-      Usuario usuarioAdministrador = new Usuario();
-      usuarioAdministrador.setCorreo("admin@admin.com");
-      usuarioAdministrador.setContrasena(passwordEncoder.encode("admin"));
+		if (usuarioService.obtenerTamano() == 0) {
+			Cargo administrador = cargoService.obtenerPorNombre("ADMINISTRADOR");
 
-      Empleado empleadoAdministrador = new Empleado();
-      empleadoAdministrador.setNombre("Admin");
-      empleadoAdministrador.setApellido("Admin");
-      empleadoAdministrador.setDni("77777777");
-      empleadoAdministrador.setTelefono("923123123");
-      empleadoAdministrador.setUsuario(usuarioAdministrador);
-      empleadoAdministrador.setCargo(administrador);
+			Usuario usuarioAdministrador = new Usuario();
+			usuarioAdministrador.setCorreo("admin@admin.com");
+			usuarioAdministrador.setContrasena(passwordEncoder.encode("admin"));
 
-      usuarioAdministrador.setEmpleado(empleadoAdministrador);
+			Empleado empleadoAdministrador = new Empleado();
+			empleadoAdministrador.setNombre("Admin");
+			empleadoAdministrador.setApellido("Admin");
+			empleadoAdministrador.setDni("77777777");
+			empleadoAdministrador.setTelefono("923123123");
 
-      usuarioService.agregar(usuarioAdministrador);
+			empleadoAdministrador.setFechaRegistro(fechaString);
+			empleadoAdministrador.setUsuario(usuarioAdministrador);
+			empleadoAdministrador.setCargo(administrador);
 
-      /* ------------------------------------------------------------- */
+			usuarioAdministrador.setEmpleado(empleadoAdministrador);
 
-      Cargo mesero = cargoService.obtenerPorNombre("ROLE_MESERO");
+			usuarioService.agregar(usuarioAdministrador);
 
-      Usuario usuarioMesero = new Usuario();
-      usuarioMesero.setCorreo("mesero@mesero.com");
-      usuarioMesero.setContrasena(passwordEncoder.encode("mesero"));
+			/* ------------------------------------------------------------- */
 
-      Empleado empleadoMesero = new Empleado();
-      empleadoMesero.setNombre("Mesero");
-      empleadoMesero.setApellido("Mesero");
-      empleadoMesero.setDni("66666666");
-      empleadoMesero.setTelefono("985737523");
-      empleadoMesero.setUsuario(usuarioMesero);
-      empleadoMesero.setCargo(mesero);
+			Cargo mesero = cargoService.obtenerPorNombre("MESERO");
 
-      usuarioMesero.setEmpleado(empleadoMesero);
+			Usuario usuarioMesero = new Usuario();
+			usuarioMesero.setCorreo("mesero@mesero.com");
+			usuarioMesero.setContrasena(passwordEncoder.encode("mesero"));
 
-      usuarioService.agregar(usuarioMesero);
+			Empleado empleadoMesero = new Empleado();
+			empleadoMesero.setNombre("Mesero");
+			empleadoMesero.setApellido("Mesero");
+			empleadoMesero.setDni("66666666");
+			empleadoMesero.setTelefono("985737523");
+			empleadoMesero.setUsuario(usuarioMesero);
+			empleadoMesero.setCargo(mesero);
+			empleadoMesero.setFechaRegistro(fechaString);
+			usuarioMesero.setEmpleado(empleadoMesero);
 
-      /* ------------------------------------------------------------- */
+			usuarioService.agregar(usuarioMesero);
 
-      Cargo cajero = cargoService.obtenerPorNombre("ROLE_CAJERO");
+			/* ------------------------------------------------------------- */
 
-      Usuario usuarioCajero = new Usuario();
-      usuarioCajero.setCorreo("cajero@cajero.com");
-      usuarioCajero.setContrasena(passwordEncoder.encode("cajero"));
+			Cargo cajero = cargoService.obtenerPorNombre("CAJERO");
 
-      Empleado empleadoCajero = new Empleado();
-      empleadoCajero.setNombre("Cajero");
-      empleadoCajero.setApellido("Cajero");
-      empleadoCajero.setDni("55555555");
-      empleadoCajero.setTelefono("985743657");
-      empleadoCajero.setUsuario(usuarioCajero);
-      empleadoCajero.setCargo(cajero);
+			Usuario usuarioCajero = new Usuario();
+			usuarioCajero.setCorreo("cajero@cajero.com");
+			usuarioCajero.setContrasena(passwordEncoder.encode("cajero"));
 
-      usuarioCajero.setEmpleado(empleadoCajero);
+			Empleado empleadoCajero = new Empleado();
+			empleadoCajero.setNombre("Cajero");
+			empleadoCajero.setApellido("Cajero");
+			empleadoCajero.setDni("55555555");
+			empleadoCajero.setTelefono("985743657");
+			empleadoCajero.setFechaRegistro(fechaString);
+			empleadoCajero.setUsuario(usuarioCajero);
+			empleadoCajero.setCargo(cajero);
 
-      usuarioService.agregar(usuarioCajero);
+			usuarioCajero.setEmpleado(empleadoCajero);
 
-      /* ------------------------------------------------------------- */
+			usuarioService.agregar(usuarioCajero);
 
-      Cargo cocinero = cargoService.obtenerPorNombre("ROLE_COCINERO");
+			/* ------------------------------------------------------------- */
 
-      Usuario usuarioCocinero = new Usuario();
-      usuarioCocinero.setCorreo("cocinero@cocinero.com");
-      usuarioCocinero.setContrasena(passwordEncoder.encode("cocinero"));
+			Cargo cocinero = cargoService.obtenerPorNombre("COCINERO");
 
-      Empleado empleadoCocinero = new Empleado();
-      empleadoCocinero.setNombre("Cocinero");
-      empleadoCocinero.setApellido("Cocinero");
-      empleadoCocinero.setDni("44444444");
-      empleadoCocinero.setTelefono("995845948");
-      empleadoCocinero.setUsuario(usuarioCocinero);
-      empleadoCocinero.setCargo(cocinero);
+			Usuario usuarioCocinero = new Usuario();
+			usuarioCocinero.setCorreo("cocinero@cocinero.com");
+			usuarioCocinero.setContrasena(passwordEncoder.encode("cocinero"));
 
-      usuarioCocinero.setEmpleado(empleadoCocinero);
+			Empleado empleadoCocinero = new Empleado();
+			empleadoCocinero.setNombre("Cocinero");
+			empleadoCocinero.setApellido("Cocinero");
+			empleadoCocinero.setDni("44444444");
+			empleadoCocinero.setFechaRegistro(fechaString);
+			empleadoCocinero.setTelefono("995845948");
+			empleadoCocinero.setUsuario(usuarioCocinero);
+			empleadoCocinero.setCargo(cocinero);
 
-      usuarioService.agregar(usuarioCocinero);
+			usuarioCocinero.setEmpleado(empleadoCocinero);
 
-      /* ------------------------------------------------------------- */
+			usuarioService.agregar(usuarioCocinero);
 
-      Cargo gerente = cargoService.obtenerPorNombre("ROLE_GERENTE");
+			/* ------------------------------------------------------------- */
 
-      Usuario usuarioGerente = new Usuario();
-      usuarioGerente.setCorreo("gerente@gerente.com");
-      usuarioGerente.setContrasena(passwordEncoder.encode("gerente"));
+			Cargo gerente = cargoService.obtenerPorNombre("GERENTE");
 
-      Empleado empleadoGerente = new Empleado();
-      empleadoGerente.setNombre("Gerente");
-      empleadoGerente.setApellido("Gerente");
-      empleadoGerente.setDni("33333333");
-      empleadoGerente.setTelefono("985684839");
-      empleadoGerente.setUsuario(usuarioGerente);
-      empleadoGerente.setCargo(gerente);
+			Usuario usuarioGerente = new Usuario();
+			usuarioGerente.setCorreo("gerente@gerente.com");
+			usuarioGerente.setContrasena(passwordEncoder.encode("gerente"));
 
-      usuarioGerente.setEmpleado(empleadoGerente);
+			Empleado empleadoGerente = new Empleado();
+			empleadoGerente.setNombre("Gerente");
+			empleadoGerente.setApellido("Gerente");
+			empleadoGerente.setDni("33333333");
+			empleadoGerente.setTelefono("985684839");
+			empleadoGerente.setFechaRegistro(fechaString);
+			empleadoGerente.setUsuario(usuarioGerente);
+			empleadoGerente.setCargo(gerente);
 
-      usuarioService.agregar(usuarioGerente);
-    }
-  }
+			usuarioGerente.setEmpleado(empleadoGerente);
+
+			usuarioService.agregar(usuarioGerente);
+		}
+	}
 }
