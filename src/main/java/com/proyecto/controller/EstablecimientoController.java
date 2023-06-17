@@ -48,7 +48,7 @@ class EstablecimientoRestController {
 
 @Controller
 @RequestMapping(value = "/configuracion/establecimiento")
-public class EstablecimientoController {
+class EstablecimientoController {
   @Autowired
   EstablecimientoService establecimientoService;
 

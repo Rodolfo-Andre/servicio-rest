@@ -1,6 +1,5 @@
 package com.proyecto.entity;
 
-import java.util.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +10,7 @@ public class Comprobante {
   private Integer id;
 
   @Column(name = "FECHA_EMISION")
-  private Date fechaEmision;
+  private String fechaEmision;
 
   @Column(name = "PRECIO_TOTAL_PEDIDO")
   private double precioTotalPedido;
@@ -71,11 +70,11 @@ public class Comprobante {
     this.id = id;
   }
 
-  public Date getFechaEmision() {
+  public String getFechaEmision() {
     return fechaEmision;
   }
 
-  public void setFechaEmision(Date fechaEmision) {
+  public void setFechaEmision(String fechaEmision) {
     this.fechaEmision = fechaEmision;
   }
 
