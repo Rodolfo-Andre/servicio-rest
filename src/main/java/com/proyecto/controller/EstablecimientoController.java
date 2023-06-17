@@ -20,7 +20,6 @@ import com.proyecto.service.EstablecimientoService;
 @RestController
 @RequestMapping(value = "/configuracion/establecimiento")
 class EstablecimientoRestController {
-
   @Autowired
   EstablecimientoService establecimientoService;
 
@@ -59,5 +58,4 @@ public class EstablecimientoController {
 
     return "pages/establecimiento";
   }
-
 }
