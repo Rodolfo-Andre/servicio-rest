@@ -1,6 +1,5 @@
 package com.proyecto.entity;
 
-import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +12,6 @@ public class Usuario {
   private String correo;
 
   private String contrasena;
-
 
   @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
   private Empleado empleado;
@@ -42,7 +40,6 @@ public class Usuario {
     this.contrasena = contrasena;
   }
 
-  
   public Empleado getEmpleado() {
     return empleado;
   }

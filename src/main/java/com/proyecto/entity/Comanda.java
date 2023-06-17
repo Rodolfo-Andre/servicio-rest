@@ -2,11 +2,9 @@ package com.proyecto.entity;
 
 import jakarta.persistence.*;
 import java.util.List;
-import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name = "COMANDA")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Comanda {
   @Id
   private Integer id;
@@ -81,7 +79,6 @@ public class Comanda {
   public Empleado getEmpleado() {
     return empleado;
   }
-  
 
   public void setEmpleado(Empleado empleado) {
     this.empleado = empleado;

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name = "ESTABLECIMIENTO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Establecimiento {
   @Id
   public String id;
@@ -18,8 +17,6 @@ public class Establecimiento {
   private String direccion;
 
   private String ruc;
-
-
 
   @OneToMany(mappedBy = "establecimiento")
   @JsonIgnore
@@ -64,8 +61,6 @@ public class Establecimiento {
   public void setRuc(String ruc) {
     this.ruc = ruc;
   }
-
-
 
   public List<Caja> getListaCaja() {
     return listaCaja;

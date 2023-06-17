@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name = "METODO_PAGO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class MetodoPago {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,14 +14,14 @@ public class MetodoPago {
   private String metodo;
 
   public List<Comprobante> getListComprobante() {
-	return listComprobante;
-}
+    return listComprobante;
+  }
 
-public void setListComprobante(List<Comprobante> listComprobante) {
-	this.listComprobante = listComprobante;
-}
+  public void setListComprobante(List<Comprobante> listComprobante) {
+    this.listComprobante = listComprobante;
+  }
 
-@OneToMany(mappedBy = "metodopago")
+  @OneToMany(mappedBy = "metodopago")
   @JsonIgnore
   private List<Comprobante> listComprobante;
 
