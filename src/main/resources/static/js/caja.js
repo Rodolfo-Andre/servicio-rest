@@ -5,7 +5,7 @@ $d.addEventListener("DOMContentLoaded", () => {
 });
 
 const initializeTable = () => {
-  const table = $("#tablaCaja").DataTable({
+  $("#tablaCaja").DataTable({
     language: {
       url: "/language/datatables-es-mx.json",
     },

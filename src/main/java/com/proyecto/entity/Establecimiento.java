@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name = "ESTABLECIMIENTO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Establecimiento {
 
   @Id

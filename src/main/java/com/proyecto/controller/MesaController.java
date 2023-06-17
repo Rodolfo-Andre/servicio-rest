@@ -14,8 +14,6 @@ class MesaRestController {
   @Autowired
   MesaService mesaService;
 
-
-
   @GetMapping(value = "/lista")
   public List<Mesa> lista() {
     return mesaService.obtenerTodo();
@@ -23,17 +21,17 @@ class MesaRestController {
 
   @PostMapping(value = "/grabar")
   public void grabar(@RequestBody Mesa mesa) {
-	  mesaService.agregar(mesa);
+    mesaService.agregar(mesa);
   }
 
   @PutMapping(value = "/actualizar")
   public void actualizar(@RequestBody Mesa mesa) {
-	  mesaService.actualizar(mesa);
+    mesaService.actualizar(mesa);
   }
 
   @DeleteMapping(value = "/eliminar/{codigo}")
   public void eliminar(@PathVariable("codigo") Integer cod) {
-	  mesaService.eliminar(cod);
+    mesaService.eliminar(cod);
   }
 }
 

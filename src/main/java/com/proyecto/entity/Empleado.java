@@ -1,7 +1,6 @@
 package com.proyecto.entity;
 
 import java.util.*;
-import org.springframework.data.annotation.CreatedDate;
 import com.fasterxml.jackson.annotation.*;
 import com.proyecto.utils.Utilidades;
 import jakarta.persistence.*;
@@ -21,7 +20,7 @@ public class Empleado {
 
   private String dni;
 
-  @Column(name = "FECHA_REGISTRO", nullable = false, updatable = false)
+  @Column(name = "FECHA_REGISTRO")
   private String fechaRegistro;
 
   @ManyToOne

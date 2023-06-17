@@ -55,7 +55,7 @@ class EstablecimientoController {
 
   @GetMapping(value = "")
   public String index(Model model) {
-    model.addAttribute("listestablecimiento", establecimientoService.obtenerTodo());
+    model.addAttribute("listaEstablecimiento", establecimientoService.obtenerTodo());
 
     return "pages/establecimiento";
   }

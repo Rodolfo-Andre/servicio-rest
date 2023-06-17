@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "ESTADO_COMANDA")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class EstadoComanda {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
