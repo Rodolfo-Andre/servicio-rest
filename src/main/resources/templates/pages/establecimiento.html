@@ -37,8 +37,8 @@
               <thead class="align-middle">
                 <th>Código</th>
                 <th>Nombre</th>
-                <th>Teléfono</th>
                 <th>Dirección</th>
+                <th>Teléfono</th>
                 <th>RUC</th>
               </thead>
               <tbody>
@@ -47,10 +47,10 @@
                   class="align-middle"
                 >
                   <td th:text="${establecimiento.id}"></td>
-                  <td th:text="${establecimiento.nombre}"></td>
-                  <td th:text="${establecimiento.telefono}"></td>
-                  <td th:text="${establecimiento.direccion}"></td>
-                  <td th:text="${establecimiento.ruc}"></td>
+                  <td th:text="${establecimiento.nomEstablecimiento}"></td>
+                  <td th:text="${establecimiento.direccionestablecimiento}"></td>
+                  <td th:text="${establecimiento.telefonoestablecimiento}"></td>
+                  <td th:text="${establecimiento.rucestablecimiento}"></td>
                 </tr>
               </tbody>
             </table>
