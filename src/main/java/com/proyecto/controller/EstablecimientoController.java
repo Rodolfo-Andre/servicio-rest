@@ -33,6 +33,7 @@ class EstablecimientoRestController {
   public void agregar(
       @RequestBody Establecimiento establecimiento) {
     establecimientoService.agregar(establecimiento);
+    System.out.println("xd" + establecimiento.getDireccionestablecimiento());
   }
 
   @PutMapping(value = "/actualizar")

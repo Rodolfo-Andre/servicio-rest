@@ -26,7 +26,7 @@ public class DatabaseLoader implements CommandLineRunner {
 	private TipoComprobanteService tipoComprobanteService;
 	@Autowired
 	private EstablecimientoService establecimientoService;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -37,14 +37,13 @@ public class DatabaseLoader implements CommandLineRunner {
 		String formato = "dd/MM/yyyy";
 		SimpleDateFormat sdf = new SimpleDateFormat(formato);
 		String fechaString = sdf.format(fechaActual);
-		
+
 		if (establecimientoService.obtenerTamano() == 0) {
 			Establecimiento establecimiento = new Establecimiento();
-			establecimiento.setId("ES-01");
-			establecimiento.setDireccion("Av.Izaguirre");
-			establecimiento.setNombre("Sangunchería Wong");
-			establecimiento.setTelefono("942850902");
-			establecimiento.setRuc("20509311412");
+			establecimiento.setDireccionestablecimiento("Av.Izaguirre");
+			establecimiento.setNomEstablecimiento("Sangunchería Wong");
+			establecimiento.setTelefonoestablecimiento("942850902");
+			establecimiento.setRucestablecimiento("20217382809");
 
 			establecimientoService.agregar(establecimiento);
 		}
@@ -82,8 +81,6 @@ public class DatabaseLoader implements CommandLineRunner {
 			tipoComprobanteService.agregar(new TipoComprobante("Factura"));
 			tipoComprobanteService.agregar(new TipoComprobante("Boleta"));
 		}
-
-	
 
 		if (usuarioService.obtenerTamano() == 0) {
 			Cargo administrador = cargoService.obtenerPorNombre("ADMINISTRADOR");

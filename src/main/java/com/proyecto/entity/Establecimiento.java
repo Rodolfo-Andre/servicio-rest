@@ -8,64 +8,62 @@ import com.fasterxml.jackson.annotation.*;
 @Table(name = "ESTABLECIMIENTO")
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Establecimiento {
+
   @Id
-  public String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-  private String nombre;
+  private String nomEstablecimiento;
 
-  private String telefono;
+  private String telefonoestablecimiento;
 
-  private String direccion;
+  private String direccionestablecimiento;
 
-  private String ruc;
-
-
+  private String rucestablecimiento;
 
   @OneToMany(mappedBy = "establecimiento")
   @JsonIgnore
   private List<Caja> listaCaja;
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
-  public String getNombre() {
-    return nombre;
+  public String getNomEstablecimiento() {
+    return nomEstablecimiento;
   }
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
+  public void setNomEstablecimiento(String nomEstablecimiento) {
+    this.nomEstablecimiento = nomEstablecimiento;
   }
 
-  public String getTelefono() {
-    return telefono;
+  public String getTelefonoestablecimiento() {
+    return telefonoestablecimiento;
   }
 
-  public void setTelefono(String telefono) {
-    this.telefono = telefono;
+  public void setTelefonoestablecimiento(String telefonoestablecimiento) {
+    this.telefonoestablecimiento = telefonoestablecimiento;
   }
 
-  public String getDireccion() {
-    return direccion;
+  public String getDireccionestablecimiento() {
+    return direccionestablecimiento;
   }
 
-  public void setDireccion(String direccion) {
-    this.direccion = direccion;
+  public void setDireccionestablecimiento(String direccionestablecimiento) {
+    this.direccionestablecimiento = direccionestablecimiento;
   }
 
-  public String getRuc() {
-    return ruc;
+  public String getRucestablecimiento() {
+    return rucestablecimiento;
   }
 
-  public void setRuc(String ruc) {
-    this.ruc = ruc;
+  public void setRucestablecimiento(String rucestablecimiento) {
+    this.rucestablecimiento = rucestablecimiento;
   }
-
-
 
   public List<Caja> getListaCaja() {
     return listaCaja;
@@ -74,4 +72,5 @@ public class Establecimiento {
   public void setListaCaja(List<Caja> listaCaja) {
     this.listaCaja = listaCaja;
   }
+
 }
