@@ -12,119 +12,45 @@ import com.proyecto.entity.*;
 import com.proyecto.service.PlatoService;
 import com.proyecto.utils.ServicioImagen;
 
-@Controller
+@RestController
 @RequestMapping(value = "/configuracion/plato")
-public class PlatoController {
+ class PlatoRestController {
   @Autowired
   PlatoService platoService;
 
-  @GetMapping(value = "")
-  public String index(Model model) {
-    model.addAttribute("listaPlato", platoService.obtenerTodo());
-    return "pages/plato";
-  }
+  @GetMapping(value = "/lista")
+	public List<Plato> lista() {
+	return platoService.obtenerTodo();
+	}
+  
+   @PostMapping(value="/registrar")
+   public void registrar(@RequestBody Plato plato) {
+	   platoService.agregar(plato);
+   }
+   
+   @PutMapping(value="/actualizar")
+   public void actualizar(@RequestBody Plato plato) {
+	   platoService.actualizar(plato);
+   }
+   
+   @DeleteMapping(value="/eliminar/{codigo}")
+	   public void eliminar(@PathVariable("codigo")String cod ) {
+	   platoService.eliminar(cod);
+   }
+}
 
-  @GetMapping(value = "/obtener/{id}")
-  @ResponseBody
-  public Plato buscarPorId(@PathVariable String id) {
-    return platoService.obtenerPorId(id);
-  }
-
-  @GetMapping(value = "/obtener")
-  @ResponseBody
-  public List<Plato> listar() {
-    return platoService.obtenerTodo();
-  }
-
-  @PostMapping(value = "/grabar")
-  public String grabar(RedirectAttributes redirect,
-      @RequestParam("name") String nombre,
-      @RequestParam("price") Double precio,
-      @RequestParam("image") MultipartFile imagen,
-      @RequestParam("cboCategoryDish") String idCategoria) {
-    try {
-      Plato plato = new Plato();
-
-      plato.setNombre(nombre);
-      plato.setPrecioPlato(precio);
-      plato.setImagen(ServicioImagen.subirImagen(imagen.getBytes()).get("url").toString());
-
-      CategoriaPlato categoriaPlato = new CategoriaPlato();
-      categoriaPlato.setId(idCategoria);
-
-      plato.setCategoriaPlato(categoriaPlato);
-
-      platoService.agregar(plato);
-      redirect.addFlashAttribute("mensaje", "Plato registrado correctamente");
-      redirect.addFlashAttribute("tipo", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      redirect.addFlashAttribute("mensaje", "Error al registrar plato");
-      redirect.addFlashAttribute("tipo", "error");
-    }
-
-    return "redirect:/configuracion/plato";
-  }
-
-  @PostMapping(value = "/actualizar")
-  public String actualizar(RedirectAttributes redirect,
-      @RequestParam("id") String id,
-      @RequestParam("name") String nombre,
-      @RequestParam("price") Double precio,
-      @RequestParam("image") MultipartFile imagen,
-      @RequestParam("cboCategoryDish") String idCategoria) {
-    try {
-      Plato plato = platoService.obtenerPorId(id);
-
-      plato.setNombre(nombre);
-      plato.setPrecioPlato(precio);
-
-      if (imagen.getSize() > 0) {
-        plato.setImagen(ServicioImagen.subirImagen(imagen.getBytes()).get("url").toString());
-      }
-
-      CategoriaPlato categoriaPlato = new CategoriaPlato();
-      categoriaPlato.setId(idCategoria);
-
-      plato.setCategoriaPlato(categoriaPlato);
-
-      platoService.actualizar(plato);
-      redirect.addFlashAttribute("mensaje", "Plato actualizado correctamente");
-      redirect.addFlashAttribute("tipo", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      redirect.addFlashAttribute("mensaje", "Error al actualizar plato");
-      redirect.addFlashAttribute("tipo", "error");
-    }
-
-    return "redirect:/configuracion/plato";
-  }
-
-  @PostMapping(value = "/eliminar")
-  public String eliminar(RedirectAttributes redirect, @RequestParam("id") String id) {
-    try {
-      platoService.eliminar(id);
-      redirect.addFlashAttribute("mensaje", "Plato eliminado correctamente");
-      redirect.addFlashAttribute("tipo", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      redirect.addFlashAttribute("mensaje", "Error al eliminar plato");
-      redirect.addFlashAttribute("tipo", "error");
-    }
-
-    return "redirect:/configuracion/plato";
-  }
-
-  @GetMapping(value = "/obtener-tamano-detalle-comanda-por-plato/{id}")
-  @ResponseBody
-  public int obtenerTamanoDetalleComandaDePlato(@PathVariable String id) {
-    return platoService.obtenerTamanoDetalleComandaDePlato(id);
-  }
-
-  @GetMapping(value = "/obtener-by-categoria/{id}")
-  @ResponseBody
-  public List<Plato> obtenerPlatoPorCategoria(@PathVariable String id) {
-    List<Plato> listaPlato = platoService.obtenerPlatoByCategoriId(id);
-    return listaPlato;
-  }
+   @Controller
+   @RequestMapping(value="/configuracion/plato")
+   class PlatoController{
+	   @Autowired
+	   PlatoService platoService;
+	   
+	   @GetMapping(value="")
+	   public String index(Model model) {
+		   model.addAttribute("listaPlato",platoService.obtenerTodo());
+		   return "pages/plato";
+	   
+	   
+   }
+ 
 }

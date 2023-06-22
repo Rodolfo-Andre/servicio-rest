@@ -13,8 +13,6 @@ import com.proyecto.service.UsuarioService;
 class EmpleadoRestController {
 	@Autowired
 	EmpleadoService empleadoService;
-
-
 	@Autowired
 	UsuarioService usuarioService;
 

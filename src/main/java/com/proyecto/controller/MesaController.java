@@ -20,7 +20,7 @@ class MesaRestController {
   public List<Mesa> lista() {
     return mesaService.obtenerTodo();
   }
-
+  
   @PostMapping(value = "/grabar")
   public void grabar(@RequestBody Mesa mesa) {
 	  mesaService.agregar(mesa);
@@ -49,3 +49,39 @@ class MesaController {
     return "pages/mesas";
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
