@@ -6,7 +6,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "TIPO_COMPROBANTE")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class TipoComprobante {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

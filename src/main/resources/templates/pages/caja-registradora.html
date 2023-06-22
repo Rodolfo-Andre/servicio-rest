@@ -41,7 +41,6 @@
                 <th>Total</th>
                 <th>Tipo Comprobante</th>
                 <th>Caja</th>
-                <th>PDF</th>
               </thead>
               <tbody>
                 <tr th:each="comprobante : ${listar}" class="align-middle">
@@ -55,21 +54,6 @@
                   <td th:text="${comprobante.tipoComprobante.tipo}"></td>
 
                   <td th:text="${comprobante.caja.id}"></td>
-
-                  <td>
-                    <form
-                      method="GET"
-                      th:action="@{/reportes/reporte-cdp}"
-                      target="_blank"
-                    >
-                      <input
-                        type="hidden"
-                        name="id"
-                        th:value="${ comprobante.id }"
-                      />
-                      <input class="btn-danger btn" type="submit" value="PDF" />
-                    </form>
-                  </td>
                 </tr>
               </tbody>
             </table>
@@ -77,7 +61,7 @@
         </div>
       </main>
 
-      <template th:insert="~{/fragments/modal-template}" id="modal-template">
+      <template th:insert="~{fragments/modal-template}" id="modal-template">
       </template>
 
       <!-- Custom JavaScript -->

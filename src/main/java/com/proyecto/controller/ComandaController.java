@@ -1,15 +1,10 @@
 package com.proyecto.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.proyecto.entity.*;
 import com.proyecto.service.*;
 
@@ -19,30 +14,83 @@ class ComandaRestController {
   @Autowired
   ComandaService comandaService;
   @Autowired
-  MesaService mesaService;
-  @Autowired
-  PlatoService platoService;
-  @Autowired
   DetalleComandaService detalleComandaService;
   @Autowired
-  EmpleadoService empleadoService;
+  MesaService mesaService;
 
+  @PostMapping(value = "/registrar")
+  public void registrar(@RequestBody Comanda comanda) {
+    comandaService.agregar(comanda);
+    comanda.getListaDetalleComanda().forEach(dc -> {
+      dc.setComanda(comanda);
+      detalleComandaService.registrar(dc);
+    });
+
+    Mesa mesa = mesaService.obtenerPorId(comanda.getMesa().getId());
+    mesa.setEstado("Ocupado");
+    mesaService.actualizar(mesa);
+  }
+
+  @PutMapping(value = "/actualizar")
+  public void actualizar(@RequestBody Comanda comanda) {
+    List<DetalleComanda> listaDetalleComandaSinActualizar = detalleComandaService.findByComandaId(comanda.getId());
+    List<DetalleComanda> listaDetalleComandaNueva = comanda.getListaDetalleComanda();
+
+    // Actualizar o eliminar detalle comanda existente
+    listaDetalleComandaSinActualizar.forEach(detalleComandaExistente -> {
+      DetalleComanda detalleComanda = listaDetalleComandaNueva.stream()
+          .filter(dc -> dc.getPlato().getId().equals(detalleComandaExistente.getPlato().getId()))
+          .findFirst()
+          .orElse(null);
+
+      if (detalleComanda == null) {
+        detalleComandaService.eliminar(detalleComandaExistente.getId());
+      } else {
+        detalleComandaService.actualizar(detalleComanda);
+      }
+    });
+
+    // Registrar nuevos detalles de la comanda
+    listaDetalleComandaNueva.forEach(nuevoDetalleComanda -> {
+      boolean existeDetalleComanda = listaDetalleComandaSinActualizar.stream()
+          .anyMatch(detalleComandaExistente -> detalleComandaExistente.getPlato().getId()
+              .equals(nuevoDetalleComanda.getPlato().getId()));
+
+      if (!existeDetalleComanda) {
+        detalleComandaService.registrar(nuevoDetalleComanda);
+      }
+    });
+
+    comandaService.actualizar(comanda);
+  }
+
+  @PutMapping(value = "/actualizar-estado/{codigo}")
+  public void actualizar(@PathVariable("codigo") int codigo) {
+    Comanda comanda = comandaService.obtenerPorId(codigo);
+    EstadoComanda estadoComanda = new EstadoComanda();
+
+    estadoComanda.setId(2);
+    comanda.setEstadoComanda(estadoComanda);
+    comandaService.actualizar(comanda);
+  }
+
+  @DeleteMapping(value = "/eliminar/{codigo}")
+  public void eliminar(@PathVariable("codigo") int codigo) {
+    Comanda comanda = comandaService.obtenerPorId(codigo);
+    comanda.getListaDetalleComanda().forEach(dc -> detalleComandaService.eliminar(dc.getId()));
+    comandaService.eliminar(codigo);
+  }
 }
+
 @Controller
 @RequestMapping(value = "/configuracion/comanda")
+class ComandaController {
+  @Autowired
+  ComandaService comandaService;
 
-class ComandaController{
-	 @Autowired
-	  ComandaService comandaService;
-	 
-	 @GetMapping(value = "")
-	  public String index(Model model) {
-	    model.addAttribute("listaComanda", comandaService.obtenerTodo());
-	    return "pages/comanda";
-	  }
-
+  @GetMapping(value = "")
+  public String index(Model model) {
+    model.addAttribute("listaComanda", comandaService.obtenerTodo());
+    return "pages/comanda";
+  }
 }
-
-
-
-

@@ -37,7 +37,6 @@ public class CategoriaPlatoController {
   public String grabar(RedirectAttributes redirect, @RequestParam("name") String nombreCategoria) {
     try {
       CategoriaPlato categoriaPlato = new CategoriaPlato();
-      categoriaPlato.setNombre(nombreCategoria);
 
       categoriaPlatoService.agregar(categoriaPlato);
 
@@ -57,7 +56,6 @@ public class CategoriaPlatoController {
       @RequestParam("name") String nombre) {
     try {
       CategoriaPlato categoriaPlato = categoriaPlatoService.obtenerPorId(id);
-      categoriaPlato.setNombre(nombre);
 
       categoriaPlatoService.actualizar(categoriaPlato);
       redirect.addFlashAttribute("mensaje", "Categoría de plato actualizada correctamente");

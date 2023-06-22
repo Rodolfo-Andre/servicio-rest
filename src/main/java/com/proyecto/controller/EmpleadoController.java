@@ -11,40 +11,40 @@ import com.proyecto.service.UsuarioService;
 @RestController
 @RequestMapping(value = "/configuracion/empleado")
 class EmpleadoRestController {
-	@Autowired
-	EmpleadoService empleadoService;
-	@Autowired
-	UsuarioService usuarioService;
+  @Autowired
+  EmpleadoService empleadoService;
+  @Autowired
+  UsuarioService usuarioService;
 
-	@PostMapping(value = "/registrar")
-	public void registrar(@RequestBody Empleado empleado) {
-		empleadoService.registrar(empleado);
-	}
+  @PostMapping(value = "/registrar")
+  public void registrar(@RequestBody Empleado empleado) {
+    empleadoService.registrar(empleado);
+  }
 
-	@PutMapping(value = "/actualizar")
-	public void actualizar(@RequestBody Empleado emple) {
-		System.out.println("ACSAD" + emple);
-		empleadoService.actualizar(emple);
-		
-	}
+  @PutMapping(value = "/actualizar")
+  public void actualizar(@RequestBody Empleado emple) {
+    System.out.println("ACSAD" + emple);
+    empleadoService.actualizar(emple);
 
-	@DeleteMapping(value = "/eliminar/{codigo}")
-	public void eliminar(@PathVariable("codigo") Integer cod) {
-		System.out.println("ACSAD");
-		empleadoService.eliminar(cod);
-	}
+  }
+
+  @DeleteMapping(value = "/eliminar/{codigo}")
+  public void eliminar(@PathVariable("codigo") Integer cod) {
+    System.out.println("ACSAD");
+    empleadoService.eliminar(cod);
+  }
 }
 
 @Controller
 @RequestMapping(value = "/configuracion/empleado")
 class EmpleadoController {
-	@Autowired
-	EmpleadoService empleadoService;
+  @Autowired
+  EmpleadoService empleadoService;
 
-	@GetMapping(value = "")
-	public String index(Model model) {
-		model.addAttribute("listar", empleadoService.listarEmpleado());
-		return "pages/empleado";
-	}
+  @GetMapping(value = "")
+  public String index(Model model) {
+    model.addAttribute("listar", empleadoService.listarEmpleado());
+    return "pages/empleado";
+  }
 
 }

@@ -44,7 +44,7 @@
                   class="align-middle"
                 >
                   <td th:text="${categoriaPlato.id}"></td>
-                  <td th:text="${categoriaPlato.nombre}"></td>
+                  <td th:text="${categoriaPlato.categoria}"></td>
                 </tr>
               </tbody>
             </table>
@@ -52,7 +52,7 @@
         </div>
       </main>
 
-      <template th:insert="~{/fragments/modal-template}" id="modal-template">
+      <template th:insert="~{fragments/modal-template}" id="modal-template">
       </template>
 
       <!-- Custom JavaScript -->

@@ -1,19 +1,16 @@
 package com.proyecto.entity;
 
-import java.util.*;
-import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "COMPROBANTE")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Comprobante {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   @Column(name = "FECHA_EMISION")
-  private Date fechaEmision;
+  private String fechaEmision;
 
   @Column(name = "PRECIO_TOTAL_PEDIDO")
   private double precioTotalPedido;
@@ -29,23 +26,7 @@ public class Comprobante {
 
   private String nombreCliente;
 
-  public String getNombreCliente() {
-	return nombreCliente;
-}
-
-public void setNombreCliente(String nombreCliente) {
-	this.nombreCliente = nombreCliente;
-}
-
-public MetodoPago getMetodopago() {
-	return metodopago;
-}
-
-public void setMetodopago(MetodoPago metodopago) {
-	this.metodopago = metodopago;
-}
-
-@ManyToOne
+  @ManyToOne
   @JoinColumn(name = "METODO_PAGO_ID")
   private MetodoPago metodopago;
 
@@ -65,6 +46,22 @@ public void setMetodopago(MetodoPago metodopago) {
   @JoinColumn(name = "CAJA_ID")
   private Caja caja;
 
+  public String getNombreCliente() {
+    return nombreCliente;
+  }
+
+  public void setNombreCliente(String nombreCliente) {
+    this.nombreCliente = nombreCliente;
+  }
+
+  public MetodoPago getMetodopago() {
+    return metodopago;
+  }
+
+  public void setMetodopago(MetodoPago metodopago) {
+    this.metodopago = metodopago;
+  }
+
   public Integer getId() {
     return id;
   }
@@ -73,11 +70,11 @@ public void setMetodopago(MetodoPago metodopago) {
     this.id = id;
   }
 
-  public Date getFechaEmision() {
+  public String getFechaEmision() {
     return fechaEmision;
   }
 
-  public void setFechaEmision(Date fechaEmision) {
+  public void setFechaEmision(String fechaEmision) {
     this.fechaEmision = fechaEmision;
   }
 

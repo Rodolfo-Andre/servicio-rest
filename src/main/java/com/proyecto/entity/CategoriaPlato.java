@@ -6,19 +6,18 @@ import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name = "CATEGORIA_PLATO")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class CategoriaPlato {
   @Id
   private String id;
 
-  private String nombre;
+  private String categoria;
 
   public CategoriaPlato() {
   }
 
   public CategoriaPlato(String id, String nombre) {
     this.id = id;
-    this.nombre = nombre;
+    this.categoria = nombre;
   }
 
   @OneToMany(mappedBy = "categoriaPlato")
@@ -33,15 +32,17 @@ public class CategoriaPlato {
     this.id = id;
   }
 
-  public String getNombre() {
-    return nombre;
-  }
+ 
 
-  public void setNombre(String nombre) {
-    this.nombre = nombre;
-  }
+  public String getCategoria() {
+	return categoria;
+}
 
-  public List<Plato> getListaPlato() {
+public void setCategoria(String categoria) {
+	this.categoria = categoria;
+}
+
+public List<Plato> getListaPlato() {
     return listaPlato;
   }
 
