@@ -7,8 +7,40 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.proyecto.entity.Empleado;
 import com.proyecto.entity.MetodoPago;
+import com.proyecto.service.EmpleadoService;
 import com.proyecto.service.MetodoPagoService;
+import com.proyecto.service.UsuarioService;
+
+
+@RestController
+@RequestMapping(value = "/configuracion/metodo-pago")
+class MetodoPagoRestController {
+	
+	@Autowired
+	MetodoPagoService MetodoPagoService;
+	
+  @PostMapping(value = "/registrar")
+  public void agregar(@RequestBody MetodoPago metodo) {
+    MetodoPagoService.agregar(metodo);
+  }
+
+  @PutMapping(value = "/actualizar")
+  public void actualizar(@RequestBody MetodoPago meto) {
+    System.out.println("ACSAD" + meto);
+    MetodoPagoService.actualizar(meto);
+
+  }
+
+  @DeleteMapping(value = "/eliminar/{codigo}")
+  public void eliminar(@PathVariable("codigo") Integer cod) {
+    System.out.println("ACSAD");
+    MetodoPagoService.eliminar(cod);
+  }
+}
+
 
 @Controller
 @RequestMapping(value = "/configuracion/metodo-pago")
