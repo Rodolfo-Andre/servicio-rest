@@ -20,7 +20,7 @@ public class CajaService {
     cajarepository.save(c);
   }
 
-  public void eliminar(String id) {
+  public void eliminar(Integer id) {
     cajarepository.deleteById(id);
   }
 }

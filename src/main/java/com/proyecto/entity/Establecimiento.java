@@ -20,7 +20,7 @@ public class Establecimiento {
 
   private String rucestablecimiento;
 
-  @OneToMany(mappedBy = "establecimiento")
+  @OneToMany(mappedBy = "Establecimiento")
   @JsonIgnore
   private List<Caja> listaCaja;
 

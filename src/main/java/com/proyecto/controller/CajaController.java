@@ -1,54 +1,53 @@
 package com.proyecto.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.proyecto.entity.Caja;
 import com.proyecto.service.*;
 
-@Controller
+@RestController
 @RequestMapping(value = "/configuracion/caja")
-public class CajaController {
+class CajaRestController {
   @Autowired
   CajaService cajaservice;
 
   @Autowired
   EstablecimientoService establecimientoService;
+  
+  
+  @PostMapping(value = "/registrar")
+	public void registrar(@RequestBody Caja caja) {
+		cajaservice.agregar(caja);
+	}
+
+	@PutMapping(value = "/actualizar")
+	public void actualizar(@RequestBody Caja caja) {
+		System.out.println("ACSAD" + caja);
+		cajaservice.agregar(caja);
+		
+	}
+
+	@DeleteMapping(value = "/eliminar/{codigo}")
+	public void eliminar(@PathVariable("codigo") Integer cod) {
+		cajaservice.eliminar(cod);
+	}
+
+}
+
+
+@Controller
+@RequestMapping(value = "/configuracion/caja")
+class CajaController {
+  @Autowired
+  CajaService cajaService;
 
   @GetMapping(value = "")
   public String index(Model model) {
-    model.addAttribute("listaCaja", cajaservice.obtenerTodo());
+    model.addAttribute("listaEstablecimiento", cajaService.obtenerTodo());
+
     return "pages/caja";
   }
 
-  @GetMapping(value = "/obtener")
-  @ResponseBody
-  public List<Caja> obtener() {
-    return cajaservice.obtenerTodo();
-  }
-
-  @PostMapping(value = "/grabar")
-  public String grabar(RedirectAttributes redirect) {
-	  /*Aca lo cambiaas cracks aunque lo tienes q modificar todo equisde*/
-    return "";
-  }
-
-  @PostMapping(value = "/eliminar")
-  public String eliminar(RedirectAttributes redirect, @RequestParam("id") String id) {
-    try {
-      cajaservice.eliminar(id);
-      redirect.addFlashAttribute("mensaje", "Caja eliminada correctamente");
-      redirect.addFlashAttribute("tipo", "success");
-    } catch (Exception e) {
-      e.printStackTrace();
-      redirect.addFlashAttribute("mensaje", "Error al eliminar caja");
-      redirect.addFlashAttribute("tipo", "error");
-    }
-
-    return "redirect:/configuracion/caja";
-  }
 }

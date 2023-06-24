@@ -7,49 +7,49 @@ import com.fasterxml.jackson.annotation.*;
 @Entity
 @Table(name = "CAJA")
 public class Caja {
-  @Id
-  private String id;
+	@Id
+	private String id;
 
-  @ManyToOne
-  @JoinColumn(name = "ESTABLECIMIENTO_ID")
-  private Establecimiento establecimiento;
+	@ManyToOne
+	@JoinColumn(name = "ESTABLECIMIENTO_ID")
+	private Establecimiento Establecimiento;
 
-  @OneToMany(mappedBy = "caja")
-  @JsonIgnore
-  private List<Comprobante> listaComprobante;
+	@OneToMany(mappedBy = "caja")
+	@JsonIgnore
+	private List<Comprobante> listaComprobante;
 
-  public String getId() {
-    return id;
-  }
+	public String getId() {
+		return id;
+	}
 
-  public void setId(String id) {
-    this.id = id;
-  }
+	public void setId(String id) {
+		this.id = id;
+	}
 
-  public Establecimiento getEstablecimiento() {
-    return establecimiento;
-  }
+	public Establecimiento getEstablecimiento() {
+		return Establecimiento;
+	}
 
-  public void setEstablecimiento(Establecimiento establecimiento) {
-    this.establecimiento = establecimiento;
-  }
+	public void setEstablecimiento(Establecimiento establecimiento) {
+		Establecimiento = establecimiento;
+	}
 
-  public List<Comprobante> getListaComprobante() {
-    return listaComprobante;
-  }
+	public List<Comprobante> getListaComprobante() {
+		return listaComprobante;
+	}
 
-  public void setListaComprobante(List<Comprobante> listaComprobante) {
-    this.listaComprobante = listaComprobante;
-  }
+	public void setListaComprobante(List<Comprobante> listaComprobante) {
+		this.listaComprobante = listaComprobante;
+	}
 
-  public static String generarIdCaja(List<Caja> listaCaja) {
-    if (listaCaja.isEmpty())
-      return "C-001";
+	public static String generarIdCaja(List<Caja> listaCaja) {
+		if (listaCaja.isEmpty())
+			return "C-001";
 
-    String ultimoId = listaCaja.get(listaCaja.size() - 1).getId();
+		String ultimoId = listaCaja.get(listaCaja.size() - 1).getId();
 
-    int numero = Integer.parseInt(String.join("", ultimoId.split("C-")));
+		int numero = Integer.parseInt(String.join("", ultimoId.split("C-")));
 
-    return "C-" + String.format("%03d", numero + 1);
-  }
+		return "C-" + String.format("%03d", numero + 1);
+	}
 }
