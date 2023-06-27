@@ -47,7 +47,7 @@
                 <th>Total</th>
               </thead>
               <tbody>
-                <tr th:each="comanda : ${comandas}" class="align-middle">
+                <tr th:each="comanda : ${listaComanda}" class="align-middle">
                   <td th:text="${comanda.id}"></td>
                   <td th:text="${comanda.estadoComanda.estado}"></td>
                   <td th:text="${comanda.mesa.id}"></td>
