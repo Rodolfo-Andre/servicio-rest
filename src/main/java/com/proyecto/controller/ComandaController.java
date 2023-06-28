@@ -1,5 +1,8 @@
 package com.proyecto.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,15 +23,8 @@ class ComandaRestController {
 
   @PostMapping(value = "/registrar")
   public void registrar(@RequestBody Comanda comanda) {
-	Comanda c = new Comanda();
-	c.setCantidadAsientos(comanda.getCantidadAsientos());
-	c.setEmpleado(comanda.getEmpleado());
-	c.setEstadoComanda(comanda.getEstadoComanda());
-	c.setFechaEmision(comanda.getFechaEmision());
-	c.setMesa(comanda.getMesa());
-	c.setPrecioTotal(comanda.getPrecioTotal());
-    Comanda comandaAgregada = comandaService.agregar(c);
-    
+    Comanda comandaAgregada = comandaService.agregar(comanda);
+
     comanda.getListaDetalleComanda().forEach(dc -> {
       dc.setComanda(comandaAgregada);
       detalleComandaService.registrar(dc);
@@ -95,10 +91,24 @@ class ComandaRestController {
 class ComandaController {
   @Autowired
   ComandaService comandaService;
+  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+  private SimpleDateFormat formatEntrada = new SimpleDateFormat("dd/MM/yyyy");
 
   @GetMapping(value = "")
   public String index(Model model) {
-    model.addAttribute("listaComanda", comandaService.obtenerTodo());
+    List<Comanda> listaComanda = comandaService.obtenerTodo().stream().map(c -> {
+      try {
+        Date fechaEmision;
+        fechaEmision = formatEntrada.parse(c.getFechaEmision());
+        c.setFechaEmision(format.format(fechaEmision));
+      } catch (ParseException e) {
+        e.printStackTrace();
+      }
+
+      return c;
+    }).toList();
+
+    model.addAttribute("listaComanda", listaComanda);
     return "pages/comanda";
   }
 }

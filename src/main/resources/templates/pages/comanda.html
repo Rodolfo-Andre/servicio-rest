@@ -56,9 +56,7 @@
                     th:text="${comanda.empleado.nombre + ' ' + comanda.empleado.apellido}"
                   ></td>
                   <td th:text="${comanda.empleado.dni}"></td>
-                  <td
-                    th:text="${#dates.format(comanda.fechaEmision, 'yyyy-MM-dd')}"
-                  ></td>
+                  <td th:text="${comanda.fechaEmision}"></td>
                   <td th:text="${comanda.precioTotal}"></td>
                 </tr>
               </tbody>

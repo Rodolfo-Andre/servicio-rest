@@ -5,17 +5,25 @@ $d.addEventListener("DOMContentLoaded", () => {
 });
 
 const initializeTable = () => {
-  const table = $("#tablaEmpleado").DataTable({
+  const table = $("#tablaComprobante").DataTable({
     language: {
       url: "/language/datatables-es-mx.json",
     },
     responsive: true,
     fixedHeader: true,
     rowId: "0",
-    columns: [null, null, null, null, null, null],
+    columns: [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      { orderable: false, searchable: false, width: 50 },
+    ],
 
     initComplete: function () {
-      $("#tablaEmpleado thead tr th").each(function (i) {
+      $("#tablaComprobante thead tr th").each(function (i) {
         const title = $(this).text();
 
         if (!["PDF"].includes(title)) {

@@ -7,52 +7,50 @@ import com.fasterxml.jackson.annotation.*;
 @Entity
 @Table(name = "METODO_PAGO")
 public class MetodoPago {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
-	private String nombreMetodoPago;
+  private String nombreMetodoPago;
 
-	public List<Comprobante> getListComprobante() {
-		return listComprobante;
-	}
+  public List<Comprobante> getListComprobante() {
+    return listComprobante;
+  }
 
-	public void setListComprobante(List<Comprobante> listComprobante) {
-		this.listComprobante = listComprobante;
-	}
+  public void setListComprobante(List<Comprobante> listComprobante) {
+    this.listComprobante = listComprobante;
+  }
 
-	@OneToMany(mappedBy = "metodopago")
-	@JsonIgnore
-	private List<Comprobante> listComprobante;
+  @OneToMany(mappedBy = "metodopago")
+  @JsonIgnore
+  private List<Comprobante> listComprobante;
 
-	public MetodoPago() {
-	}
+  public MetodoPago() {
+  }
 
-	public Integer getId() {
-		return id;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public String getNombreMetodoPago() {
-		return nombreMetodoPago;
-	}
+  public String getNombreMetodoPago() {
+    return nombreMetodoPago;
+  }
 
-	public void setNombreMetodoPago(String nombreMetodoPago) {
-		this.nombreMetodoPago = nombreMetodoPago;
-	}
+  public void setNombreMetodoPago(String nombreMetodoPago) {
+    this.nombreMetodoPago = nombreMetodoPago;
+  }
 
-	public void setMetodo(String metodo) {
-		this.nombreMetodoPago = metodo;
-	}
+  public void setMetodo(String metodo) {
+    this.nombreMetodoPago = metodo;
+  }
 
-	public MetodoPago(String nombreMetodoPago) {
-		super();
-		this.nombreMetodoPago = nombreMetodoPago;
-	}
-	
-	
+  public MetodoPago(String nombreMetodoPago) {
+    super();
+    this.nombreMetodoPago = nombreMetodoPago;
+  }
 
 }

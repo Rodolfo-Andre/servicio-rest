@@ -1,8 +1,6 @@
 package com.proyecto.entity;
 
 import jakarta.persistence.*;
-import java.util.*;
-import com.fasterxml.jackson.annotation.*;
 
 @Entity
 @Table(name = "CATEGORIA_PLATO")
@@ -20,7 +18,6 @@ public class CategoriaPlato {
     this.categoria = nombre;
   }
 
-
   public String getId() {
     return id;
   }
@@ -29,16 +26,12 @@ public class CategoriaPlato {
     this.id = id;
   }
 
- 
-
   public String getCategoria() {
-	return categoria;
-}
+    return categoria;
+  }
 
-public void setCategoria(String categoria) {
-	this.categoria = categoria;
-}
-
-
+  public void setCategoria(String categoria) {
+    this.categoria = categoria;
+  }
 
 }

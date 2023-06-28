@@ -1,5 +1,10 @@
 package com.proyecto.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +29,23 @@ class ComprobanteRestController {
 class ComprobanteController {
   @Autowired
   ComprobanteService comprobanteService;
+  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
   @GetMapping(value = "")
   public String index(Model model) {
-    model.addAttribute("listar", comprobanteService.getAll());
+    List<Comprobante> lista = comprobanteService.getAll().stream().map(c -> {
+      try {
+        Date fechaEmision;
+        fechaEmision = format.parse(c.getFechaEmision());
+        c.setFechaEmision(format.format(fechaEmision));
+      } catch (ParseException e) {
+        e.printStackTrace();
+      }
+
+      return c;
+    }).toList();
+
+    model.addAttribute("listar", lista);
     return "pages/caja-registradora";
   }
 }

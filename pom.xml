@@ -85,6 +85,13 @@
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-mysql</artifactId>
     </dependency>
+
+     <!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports - REPORTES CON JASPERS -->
+    <dependency>
+      <groupId>net.sf.jasperreports</groupId>
+      <artifactId>jasperreports</artifactId>
+      <version>6.20.5</version>
+    </dependency>
 	</dependencies>
 
 	<build>

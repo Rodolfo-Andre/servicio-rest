@@ -29,10 +29,10 @@
 
           <div class="body-info">
             <table
-              id="tablaEmpleado"
+              id="tablaComprobante"
               class="table display"
               style="width: 100%"
-              aria-describedby="Tabla de Métodos de Pagos"
+              aria-describedby="Tabla de Comprobantes de Pagos"
             >
               <thead class="align-middle">
                 <th>Código</th>
@@ -41,19 +41,30 @@
                 <th>Total</th>
                 <th>Tipo Comprobante</th>
                 <th>Caja</th>
+                <th>PDF</th>
               </thead>
               <tbody>
                 <tr th:each="comprobante : ${listar}" class="align-middle">
                   <td th:text="${comprobante.id}"></td>
-                  <td th:text="${comprobante.cliente.nombre}"></td>
-                  <td
-                    th:text="${#dates.format(comprobante.fechaEmision, 'yyyy-MM-dd')}"
-                  ></td>
-
+                  <td th:text="${comprobante.nombreCliente}"></td>
+                  <td th:text="${comprobante.fechaEmision}"></td>
                   <td th:text="${comprobante.precioTotalPedido}"></td>
                   <td th:text="${comprobante.tipoComprobante.tipo}"></td>
-
                   <td th:text="${comprobante.caja.id}"></td>
+                  <td>
+                    <form
+                      method="GET"
+                      th:action="@{/reportes/reporte-cdp}"
+                      target="_blank"
+                    >
+                      <input
+                        type="hidden"
+                        name="id"
+                        th:value="${ comprobante.id }"
+                      />
+                      <input class="btn-danger btn" type="submit" value="PDF" />
+                    </form>
+                  </td>
                 </tr>
               </tbody>
             </table>
