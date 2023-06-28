@@ -9,6 +9,7 @@ public class ServicioImagen {
   private static Cloudinary cloudinary;
 
   private ServicioImagen() {
+	  
   }
 
   public static Cloudinary obtenerCloudinary() {

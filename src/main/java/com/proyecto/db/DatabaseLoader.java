@@ -64,10 +64,10 @@ public class DatabaseLoader implements CommandLineRunner {
     }
 
     if (categoriaPlatoService.obtenerTamano() == 0) {
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-01", "Bebidas"));
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-02", "Hamburguesas"));
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-03", "Postres"));
-      categoriaPlatoService.agregar(new CategoriaPlato("CP-04", "Sopas"));
+      categoriaPlatoService.agregar(new CategoriaPlato("C-001", "Bebidas"));
+      categoriaPlatoService.agregar(new CategoriaPlato("C-002", "Hamburguesas"));
+      categoriaPlatoService.agregar(new CategoriaPlato("C-003", "Postres"));
+      categoriaPlatoService.agregar(new CategoriaPlato("C-004", "Sopas"));
     }
 
     if (estadoComandaService.obtenerTamano() == 0) {

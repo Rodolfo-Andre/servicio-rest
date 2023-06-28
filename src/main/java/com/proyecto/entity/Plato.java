@@ -11,7 +11,8 @@ public class Plato {
   private String id;
 
   private String nombre;
-
+  
+  @Column(columnDefinition = "LONGTEXT")
   private String imagen;
 
   @Column(name = "PRECIO_PLATO")
