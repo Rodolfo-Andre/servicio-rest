@@ -43,9 +43,9 @@ class ComandaRestController {
     mesaService.actualizar(mesa);
   }
 
-  @PutMapping(value = "/actualizar")
-  public void actualizar(@RequestBody Comanda comanda) {
-    List<DetalleComanda> listaDetalleComandaSinActualizar = detalleComandaService.findByComandaId(comanda.getId());
+  @PutMapping(value = "/actualizar/{codigo}")
+  public void actualizar(@PathVariable("codigo") Integer codigo, @RequestBody Comanda comanda) {
+    List<DetalleComanda> listaDetalleComandaSinActualizar = detalleComandaService.findByComandaId(codigo);
     List<DetalleComanda> listaDetalleComandaNueva = comanda.getListaDetalleComanda();
 
     // Actualizar o eliminar detalle comanda existente
@@ -58,7 +58,10 @@ class ComandaRestController {
       if (detalleComanda == null) {
         detalleComandaService.eliminar(detalleComandaExistente.getId());
       } else {
-        detalleComandaService.actualizar(detalleComanda);
+        if (detalleComanda.getId() != null) {
+          detalleComanda.setComanda(comanda);
+          detalleComandaService.actualizar(detalleComanda);
+        }
       }
     });
 
@@ -69,6 +72,7 @@ class ComandaRestController {
               .equals(nuevoDetalleComanda.getPlato().getId()));
 
       if (!existeDetalleComanda) {
+        nuevoDetalleComanda.setComanda(comanda);
         detalleComandaService.registrar(nuevoDetalleComanda);
       }
     });
