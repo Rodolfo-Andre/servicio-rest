@@ -21,7 +21,9 @@ public class EstablecimientoService {
   }
 
   public void actualizar(Establecimiento e) {
+
     establecimientoRepository.save(e);
+
   }
 
   public void eliminar(Integer id) {

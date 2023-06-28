@@ -29,10 +29,8 @@ class EstablecimientoRestController {
   }
 
   @PostMapping(value = "/grabar")
-  public void agregar(
-      @RequestBody Establecimiento establecimiento) {
+  public void agregar(@RequestBody Establecimiento establecimiento) {
     establecimientoService.agregar(establecimiento);
-    System.out.println("xd" + establecimiento.getDireccionestablecimiento());
   }
 
   @PutMapping(value = "/actualizar")

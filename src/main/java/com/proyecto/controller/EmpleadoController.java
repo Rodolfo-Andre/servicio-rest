@@ -25,7 +25,6 @@ class EmpleadoRestController {
   public void actualizar(@RequestBody Empleado emple) {
     System.out.println("ACSAD" + emple);
     empleadoService.actualizar(emple);
-
   }
 
   @DeleteMapping(value = "/eliminar/{codigo}")
