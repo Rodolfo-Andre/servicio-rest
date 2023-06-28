@@ -24,13 +24,12 @@ class CajaRestController {
 
 	@PutMapping(value = "/actualizar")
 	public void actualizar(@RequestBody Caja caja) {
-		System.out.println("ACSAD" + caja);
-		cajaservice.agregar(caja);
+		cajaservice.actualizar(caja);
 		
 	}
 
 	@DeleteMapping(value = "/eliminar/{codigo}")
-	public void eliminar(@PathVariable("codigo") Integer cod) {
+	public void eliminar(@PathVariable("codigo") String cod) {
 		cajaservice.eliminar(cod);
 	}
 

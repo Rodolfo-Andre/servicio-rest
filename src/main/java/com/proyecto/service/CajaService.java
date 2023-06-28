@@ -5,22 +5,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.proyecto.dao.CajaRepository;
 import com.proyecto.entity.Caja;
+import com.proyecto.entity.Empleado;
 
 @Service
 public class CajaService {
-  @Autowired
-  private CajaRepository cajarepository;
+	@Autowired
+	private CajaRepository cajarepository;
 
-  public List<Caja> obtenerTodo() {
-    return cajarepository.findAll();
-  }
+	public List<Caja> obtenerTodo() {
+		return cajarepository.findAll();
+	}
 
-  public void agregar(Caja c) {
-    c.setId(Caja.generarIdCaja(this.obtenerTodo()));
-    cajarepository.save(c);
-  }
+	public void agregar(Caja c) {
+		c.setId(Caja.generarIdCaja(this.obtenerTodo()));
+		cajarepository.save(c);
+	}
 
-  public void eliminar(Integer id) {
-    cajarepository.deleteById(id);
-  }
+	public void actualizar(Caja c) {
+		Caja cajaExistente = cajarepository.findById(c.getId()).orElse(null);
+		if (cajaExistente != null) {
+			cajaExistente.setEstablecimiento(c.getEstablecimiento());
+			cajarepository.save(cajaExistente);
+		}
+	}
+
+	public void eliminar(String id) {
+		cajarepository.deleteById(id);
+	}
 }
