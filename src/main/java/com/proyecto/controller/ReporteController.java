@@ -33,7 +33,7 @@ public class ReporteController {
     try {
       Comprobante comprobante = comprobanteService.findById(id);
       List<DetalleComanda> lista = comprobante.getComanda().getListaDetalleComanda();
-      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+      SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
       Resource resource = new ClassPathResource("CDP_ciclo5.jrxml");
       JasperReport jasper = JasperCompileManager.compileReport(resource.getInputStream());
