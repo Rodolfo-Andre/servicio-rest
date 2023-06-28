@@ -23,7 +23,15 @@ class ComandaRestController {
 
   @PostMapping(value = "/registrar")
   public void registrar(@RequestBody Comanda comanda) {
-    Comanda comandaAgregada = comandaService.agregar(comanda);
+    Comanda comandaAgregada = new Comanda();
+    comandaAgregada.setCantidadAsientos(comanda.getCantidadAsientos());
+    comandaAgregada.setEmpleado(comanda.getEmpleado());
+    comandaAgregada.setEstadoComanda(comanda.getEstadoComanda());
+    comandaAgregada.setFechaEmision(comanda.getFechaEmision());
+    comandaAgregada.setMesa(comanda.getMesa());
+    comandaAgregada.setPrecioTotal(comanda.getPrecioTotal());
+
+    comandaService.agregar(comandaAgregada);
 
     comanda.getListaDetalleComanda().forEach(dc -> {
       dc.setComanda(comandaAgregada);
