@@ -1,15 +1,15 @@
 package com.proyecto.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
+import java.text.*;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import com.proyecto.entity.Comanda;
 import com.proyecto.entity.Comprobante;
+import com.proyecto.entity.EstadoComanda;
 import com.proyecto.service.*;
 
 @RestController
@@ -18,8 +18,18 @@ class ComprobanteRestController {
   @Autowired
   ComprobanteService comprobanteService;
 
+  @Autowired
+  ComandaService comandaService;
+
   @PostMapping(value = "/registrar")
   public void registrar(@RequestBody Comprobante comprobante) {
+    Comanda comanda = comandaService.obtenerPorId(comprobante.getComanda().getId());
+
+    EstadoComanda estadoComanda = new EstadoComanda();
+    estadoComanda.setId(2);
+    comanda.setEstadoComanda(estadoComanda);
+    comandaService.actualizar(comanda);
+
     comprobanteService.registrar(comprobante);
   }
 }
