@@ -51,7 +51,6 @@ public class DatabaseLoader implements CommandLineRunner {
       cargoService.agregar(new Cargo("ADMINISTRADOR"));
       cargoService.agregar(new Cargo("MESERO"));
       cargoService.agregar(new Cargo("CAJERO"));
-      cargoService.agregar(new Cargo("COCINERO"));
       cargoService.agregar(new Cargo("GERENTE"));
     }
 
@@ -72,11 +71,10 @@ public class DatabaseLoader implements CommandLineRunner {
 
     if (estadoComandaService.obtenerTamano() == 0) {
       estadoComandaService.agregar(new EstadoComanda("Generado"));
-      estadoComandaService.agregar(new EstadoComanda("Preparado"));
       estadoComandaService.agregar(new EstadoComanda("Pagado"));
     }
     if (tipoComprobanteService.obtenerTamano() == 0) {
-      tipoComprobanteService.agregar(new TipoComprobante("Factura"));
+      tipoComprobanteService.agregar(new TipoComprobante("Nota de Venta"));
       tipoComprobanteService.agregar(new TipoComprobante("Boleta"));
     }
 
@@ -143,27 +141,8 @@ public class DatabaseLoader implements CommandLineRunner {
 
         usuarioService.agregar(usuarioCajero);
 
-        /* ------------------------------------------------------------- */
 
-        Cargo cocinero = cargoService.obtenerPorNombre("COCINERO");
-
-        Usuario usuarioCocinero = new Usuario();
-        usuarioCocinero.setCorreo("cocinero@cocinero.com");
-        usuarioCocinero.setContrasena(passwordEncoder.encode("cocinero"));
-
-        Empleado empleadoCocinero = new Empleado();
-        empleadoCocinero.setNombre("Cocinero");
-        empleadoCocinero.setApellido("Cocinero");
-        empleadoCocinero.setDni("44444444");
-        empleadoCocinero.setFechaRegistro(fechaString);
-        empleadoCocinero.setTelefono("995845948");
-        empleadoCocinero.setUsuario(usuarioCocinero);
-        empleadoCocinero.setCargo(cocinero);
-
-        usuarioCocinero.setEmpleado(empleadoCocinero);
-
-        usuarioService.agregar(usuarioCocinero);
-
+        
         /* ------------------------------------------------------------- */
 
         Cargo gerente = cargoService.obtenerPorNombre("GERENTE");
