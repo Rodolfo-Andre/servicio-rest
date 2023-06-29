@@ -36,11 +36,13 @@
             >
               <thead class="align-middle">
                 <th>Código</th>
+                <th>Establecimiento</th>
               </thead>
 
               <tbody>
                 <tr th:each="caja:${listaCaja}" class="align-middle">
                   <td th:text="${caja.id}"></td>
+                  <td th:text="${caja.Establecimiento.nomEstablecimiento}"></td>
                 </tr>
               </tbody>
             </table>

@@ -44,7 +44,7 @@ class CajaController {
 
   @GetMapping(value = "")
   public String index(Model model) {
-    model.addAttribute("listaEstablecimiento", cajaService.obtenerTodo());
+    model.addAttribute("listaCaja", cajaService.obtenerTodo());
 
     return "pages/caja";
   }
