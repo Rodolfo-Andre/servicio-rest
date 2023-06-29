@@ -98,6 +98,11 @@ class ComandaRestController {
   @DeleteMapping(value = "/eliminar/{codigo}")
   public void eliminar(@PathVariable("codigo") int codigo) {
     Comanda comanda = comandaService.obtenerPorId(codigo);
+
+    Mesa mesa = mesaService.obtenerPorId(comanda.getMesa().getId());
+    mesa.setEstado("Libre");
+    mesaService.actualizar(mesa);
+
     comanda.getListaDetalleComanda().forEach(dc -> detalleComandaService.eliminar(dc.getId()));
     comandaService.eliminar(codigo);
   }
