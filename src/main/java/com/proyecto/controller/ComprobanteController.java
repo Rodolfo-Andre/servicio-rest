@@ -39,15 +39,16 @@ class ComprobanteRestController {
 class ComprobanteController {
   @Autowired
   ComprobanteService comprobanteService;
-  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+  private SimpleDateFormat formatEntrada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+  private SimpleDateFormat formatSalida = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
   @GetMapping(value = "")
   public String index(Model model) {
     List<Comprobante> lista = comprobanteService.getAll().stream().map(c -> {
       try {
         Date fechaEmision;
-        fechaEmision = format.parse(c.getFechaEmision());
-        c.setFechaEmision(format.format(fechaEmision));
+        fechaEmision = formatEntrada.parse(c.getFechaEmision());
+        c.setFechaEmision(formatSalida.format(fechaEmision));
       } catch (ParseException e) {
         e.printStackTrace();
       }
