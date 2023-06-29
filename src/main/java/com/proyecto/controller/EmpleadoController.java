@@ -5,10 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.proyecto.entity.*;
-import com.proyecto.service.EmpleadoService;
-import com.proyecto.service.UsuarioService;
+import com.proyecto.service.*;
 import com.proyecto.utils.ServicioCorreo;
+import java.text.SimpleDateFormat;
 import java.util.concurrent.CompletableFuture;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/configuracion/empleado")
@@ -22,28 +23,28 @@ class EmpleadoRestController {
   public void registrar(@RequestBody Empleado empleado) {
     empleadoService.registrar(empleado);
     System.out.println("LA CONTRASEÑA GENERADA ES: " + empleado.getUsuario().getContrasena());
-    /*CompletableFuture
-    .runAsync(() -> {
-      try {
-        ServicioCorreo.enviarMensaje(empleado.getUsuario().getCorreo(),
-            "Tu contraseña para acceder a nuestra plataforma es: " +  empleado.getUsuario().getContrasena(),
-            "Bienvenido al aplicativo de comandas");
-      } catch (Exception e2) {
-        e2.printStackTrace();
-      }
-    });*/
-
+    /*
+     * CompletableFuture
+     * .runAsync(() -> {
+     * try {
+     * ServicioCorreo.enviarMensaje(empleado.getUsuario().getCorreo(),
+     * "Tu contraseña para acceder a nuestra plataforma es: " +
+     * empleado.getUsuario().getContrasena(),
+     * "Bienvenido al aplicativo de comandas");
+     * } catch (Exception e2) {
+     * e2.printStackTrace();
+     * }
+     * });
+     */
   }
 
   @PutMapping(value = "/actualizar")
   public void actualizar(@RequestBody Empleado emple) {
-    System.out.println("ACSAD" + emple);
     empleadoService.actualizar(emple);
   }
 
   @DeleteMapping(value = "/eliminar/{codigo}")
   public void eliminar(@PathVariable("codigo") Integer cod) {
-    System.out.println("ACSAD");
     empleadoService.eliminar(cod);
   }
 }
@@ -53,10 +54,25 @@ class EmpleadoRestController {
 class EmpleadoController {
   @Autowired
   EmpleadoService empleadoService;
+  private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+  private SimpleDateFormat formatEntrada = new SimpleDateFormat("dd/MM/yyyy");
 
   @GetMapping(value = "")
   public String index(Model model) {
-    model.addAttribute("listar", empleadoService.listarEmpleado());
+    List<Empleado> listaEmpleado = empleadoService.listarEmpleado().stream().map(e -> {
+      try {
+        Date fechaRegistro;
+
+        fechaRegistro = formatEntrada.parse(e.getFechaRegistro());
+        e.setFechaRegistro(format.format(fechaRegistro));
+      } catch (Exception err) {
+        err.printStackTrace();
+      }
+
+      return e;
+    }).toList();
+
+    model.addAttribute("listar", listaEmpleado);
     return "pages/empleado";
   }
 

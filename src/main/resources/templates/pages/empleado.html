@@ -51,9 +51,7 @@
                   ></td>
                   <td th:text="${empleado.telefono}"></td>
                   <td th:text="${empleado.dni}"></td>
-                  <td
-                    th:text="${#dates.format(empleado.fechaRegistro, 'yyyy-MM-dd')}"
-                  ></td>
+                  <td th:text="${empleado.fechaRegistro}"></td>
                   <td>
                     <span
                       th:text="${empleado.cargo.nombre.replace('ROLE_', '').toLowerCase()}"
