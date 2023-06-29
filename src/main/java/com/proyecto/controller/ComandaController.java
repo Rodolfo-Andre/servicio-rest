@@ -46,7 +46,12 @@ class ComandaRestController {
   @PutMapping(value = "/actualizar/{codigo}")
   public void actualizar(@PathVariable("codigo") Integer codigo, @RequestBody Comanda comanda) {
     List<DetalleComanda> listaDetalleComandaSinActualizar = detalleComandaService.findByComandaId(codigo);
-    List<DetalleComanda> listaDetalleComandaNueva = comanda.getListaDetalleComanda();
+    List<DetalleComanda> listaDetalleComandaNueva = comanda.getListaDetalleComanda().stream().map(dc -> {
+      if (dc.getId() != null && dc.getId() == 0) {
+        dc.setId(null);
+      }
+      return dc;
+    }).toList();
 
     // Actualizar o eliminar detalle comanda existente
     listaDetalleComandaSinActualizar.forEach(detalleComandaExistente -> {
@@ -58,7 +63,7 @@ class ComandaRestController {
       if (detalleComanda == null) {
         detalleComandaService.eliminar(detalleComandaExistente.getId());
       } else {
-        if (detalleComanda.getId() != null) {
+        if (detalleComanda.getId() != null && detalleComanda.getId() != 0) {
           detalleComanda.setComanda(comanda);
           detalleComandaService.actualizar(detalleComanda);
         }
