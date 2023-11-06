@@ -11,7 +11,7 @@ import com.proyecto.utils.ServicioCorreo;
 class CorreoTests {
   // @Test
   void enviarMensaje() {
-    CompletableFuture<Void> completableFuture = CompletableFuture
+    CompletableFuture
         .runAsync(() -> {
           try {
             ServicioCorreo.enviarMensaje("rcaballerov_10@outlook.com ", "hola", "aaaaa");

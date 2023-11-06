@@ -144,35 +144,11 @@ a {
   color: var(--bs-red);
 }
 
-/* -------- Imagen de Platos -------- */
-.container-img-dish {
-  text-align: center;
-}
-
-.container-img-dish > .img-dish {
-  border: 1px solid var(--secondary-color);
-}
-
-.img-dish {
-  display: inline-block;
-  text-align: center;
-  width: 160px;
-  height: 160px;
-}
-
-.img-dish > img {
-  height: -webkit-fill-available;
-}
-
-
-
-		
 @media screen and (min-width: 800px) {
-  .border-custom{
-		border-left: 1px solid #333;
-	}
-}	
-
+  .border-custom {
+    border-left: 1px solid #333;
+  }
+}
 
 .container-cards::-webkit-scrollbar {
   width: 6px;

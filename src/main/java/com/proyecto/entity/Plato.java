@@ -11,9 +11,6 @@ public class Plato {
   private String id;
 
   private String nombre;
-  
-  @Column(columnDefinition = "LONGTEXT")
-  private String imagen;
 
   @Column(name = "PRECIO_PLATO")
   private double precioPlato;
@@ -40,14 +37,6 @@ public class Plato {
 
   public void setNombre(String nombre) {
     this.nombre = nombre;
-  }
-
-  public String getImagen() {
-    return imagen;
-  }
-
-  public void setImagen(String imagen) {
-    this.imagen = imagen;
   }
 
   public double getPrecioPlato() {
