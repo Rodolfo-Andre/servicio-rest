@@ -14,7 +14,7 @@ WORKDIR /app
 COPY --from=build /app/target/*.jar /app/app.jar
 
 # Instalar libfreetype y fuentes TrueType
-RUN apk update && apk add --no-cache freetype ttf-arial
+RUN apk update && apk add --no-cache msttcorefonts-installer
 
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
