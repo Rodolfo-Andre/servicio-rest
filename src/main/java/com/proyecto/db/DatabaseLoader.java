@@ -11,7 +11,6 @@ import com.proyecto.service.*;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
-
   @Autowired
   private UsuarioService usuarioService;
   @Autowired
@@ -73,6 +72,7 @@ public class DatabaseLoader implements CommandLineRunner {
       estadoComandaService.agregar(new EstadoComanda("Generado"));
       estadoComandaService.agregar(new EstadoComanda("Pagado"));
     }
+
     if (tipoComprobanteService.obtenerTamano() == 0) {
       tipoComprobanteService.agregar(new TipoComprobante("Nota de Venta"));
       tipoComprobanteService.agregar(new TipoComprobante("Boleta"));
@@ -81,89 +81,86 @@ public class DatabaseLoader implements CommandLineRunner {
     if (usuarioService.obtenerTamano() == 0) {
       Cargo administrador = cargoService.obtenerPorNombre("ADMINISTRADOR");
 
-      if (usuarioService.obtenerTamano() == 0) {
-        Usuario usuarioAdministrador = new Usuario();
-        usuarioAdministrador.setCorreo("admin@admin.com");
-        usuarioAdministrador.setContrasena(passwordEncoder.encode("admin"));
+      Usuario usuarioAdministrador = new Usuario();
+      usuarioAdministrador.setCorreo("admin@admin.com");
+      usuarioAdministrador.setContrasena(passwordEncoder.encode("admin"));
 
-        Empleado empleadoAdministrador = new Empleado();
-        empleadoAdministrador.setNombre("Admin");
-        empleadoAdministrador.setApellido("Admin");
-        empleadoAdministrador.setDni("77777777");
-        empleadoAdministrador.setTelefono("923123123");
+      Empleado empleadoAdministrador = new Empleado();
+      empleadoAdministrador.setNombre("Admin");
+      empleadoAdministrador.setApellido("Admin");
+      empleadoAdministrador.setDni("77777777");
+      empleadoAdministrador.setTelefono("923123123");
 
-        empleadoAdministrador.setFechaRegistro(fechaString);
-        empleadoAdministrador.setUsuario(usuarioAdministrador);
-        empleadoAdministrador.setCargo(administrador);
+      empleadoAdministrador.setFechaRegistro(fechaString);
+      empleadoAdministrador.setUsuario(usuarioAdministrador);
+      empleadoAdministrador.setCargo(administrador);
 
-        usuarioAdministrador.setEmpleado(empleadoAdministrador);
+      usuarioAdministrador.setEmpleado(empleadoAdministrador);
 
-        usuarioService.agregar(usuarioAdministrador);
+      usuarioService.agregar(usuarioAdministrador);
 
-        /* ------------------------------------------------------------- */
+      /* ------------------------------------------------------------- */
 
-        Cargo mesero = cargoService.obtenerPorNombre("MESERO");
+      Cargo mesero = cargoService.obtenerPorNombre("MESERO");
 
-        Usuario usuarioMesero = new Usuario();
-        usuarioMesero.setCorreo("mesero@mesero.com");
-        usuarioMesero.setContrasena(passwordEncoder.encode("mesero"));
+      Usuario usuarioMesero = new Usuario();
+      usuarioMesero.setCorreo("mesero@mesero.com");
+      usuarioMesero.setContrasena(passwordEncoder.encode("mesero"));
 
-        Empleado empleadoMesero = new Empleado();
-        empleadoMesero.setNombre("Mesero");
-        empleadoMesero.setApellido("Mesero");
-        empleadoMesero.setDni("66666666");
-        empleadoMesero.setTelefono("985737523");
-        empleadoMesero.setUsuario(usuarioMesero);
-        empleadoMesero.setCargo(mesero);
-        empleadoMesero.setFechaRegistro(fechaString);
-        usuarioMesero.setEmpleado(empleadoMesero);
+      Empleado empleadoMesero = new Empleado();
+      empleadoMesero.setNombre("Mesero");
+      empleadoMesero.setApellido("Mesero");
+      empleadoMesero.setDni("66666666");
+      empleadoMesero.setTelefono("985737523");
+      empleadoMesero.setUsuario(usuarioMesero);
+      empleadoMesero.setCargo(mesero);
+      empleadoMesero.setFechaRegistro(fechaString);
+      usuarioMesero.setEmpleado(empleadoMesero);
 
-        usuarioService.agregar(usuarioMesero);
+      usuarioService.agregar(usuarioMesero);
 
-        /* ------------------------------------------------------------- */
+      /* ------------------------------------------------------------- */
 
-        Cargo cajero = cargoService.obtenerPorNombre("CAJERO");
+      Cargo cajero = cargoService.obtenerPorNombre("CAJERO");
 
-        Usuario usuarioCajero = new Usuario();
-        usuarioCajero.setCorreo("cajero@cajero.com");
-        usuarioCajero.setContrasena(passwordEncoder.encode("cajero"));
+      Usuario usuarioCajero = new Usuario();
+      usuarioCajero.setCorreo("cajero@cajero.com");
+      usuarioCajero.setContrasena(passwordEncoder.encode("cajero"));
 
-        Empleado empleadoCajero = new Empleado();
-        empleadoCajero.setNombre("Cajero");
-        empleadoCajero.setApellido("Cajero");
-        empleadoCajero.setDni("55555555");
-        empleadoCajero.setTelefono("985743657");
-        empleadoCajero.setFechaRegistro(fechaString);
-        empleadoCajero.setUsuario(usuarioCajero);
-        empleadoCajero.setCargo(cajero);
+      Empleado empleadoCajero = new Empleado();
+      empleadoCajero.setNombre("Cajero");
+      empleadoCajero.setApellido("Cajero");
+      empleadoCajero.setDni("55555555");
+      empleadoCajero.setTelefono("985743657");
+      empleadoCajero.setFechaRegistro(fechaString);
+      empleadoCajero.setUsuario(usuarioCajero);
+      empleadoCajero.setCargo(cajero);
 
-        usuarioCajero.setEmpleado(empleadoCajero);
+      usuarioCajero.setEmpleado(empleadoCajero);
 
-        usuarioService.agregar(usuarioCajero);
+      usuarioService.agregar(usuarioCajero);
 
+      /* ------------------------------------------------------------- */
 
-        
-        /* ------------------------------------------------------------- */
+      Cargo gerente = cargoService.obtenerPorNombre("GERENTE");
 
-        Cargo gerente = cargoService.obtenerPorNombre("GERENTE");
+      Usuario usuarioGerente = new Usuario();
+      usuarioGerente.setCorreo("gerente@gerente.com");
+      usuarioGerente.setContrasena(passwordEncoder.encode("gerente"));
 
-        Usuario usuarioGerente = new Usuario();
-        usuarioGerente.setCorreo("gerente@gerente.com");
-        usuarioGerente.setContrasena(passwordEncoder.encode("gerente"));
+      Empleado empleadoGerente = new Empleado();
+      empleadoGerente.setNombre("Gerente");
+      empleadoGerente.setApellido("Gerente");
+      empleadoGerente.setDni("33333333");
+      empleadoGerente.setTelefono("985684839");
+      empleadoGerente.setFechaRegistro(fechaString);
+      empleadoGerente.setUsuario(usuarioGerente);
+      empleadoGerente.setCargo(gerente);
 
-        Empleado empleadoGerente = new Empleado();
-        empleadoGerente.setNombre("Gerente");
-        empleadoGerente.setApellido("Gerente");
-        empleadoGerente.setDni("33333333");
-        empleadoGerente.setTelefono("985684839");
-        empleadoGerente.setFechaRegistro(fechaString);
-        empleadoGerente.setUsuario(usuarioGerente);
-        empleadoGerente.setCargo(gerente);
+      usuarioGerente.setEmpleado(empleadoGerente);
 
-        usuarioGerente.setEmpleado(empleadoGerente);
+      usuarioService.agregar(usuarioGerente);
 
-        usuarioService.agregar(usuarioGerente);
-      }
     }
   }
 }

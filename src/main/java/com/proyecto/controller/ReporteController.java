@@ -35,7 +35,7 @@ public class ReporteController {
       List<DetalleComanda> lista = comprobante.getComanda().getListaDetalleComanda();
       SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-      Resource resource = new ClassPathResource("CDP_ciclo5.jrxml");
+      Resource resource = new ClassPathResource("CDP.jrxml");
       JasperReport jasper = JasperCompileManager.compileReport(resource.getInputStream());
 
       JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(lista);
