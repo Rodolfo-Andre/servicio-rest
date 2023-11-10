@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.*;
 @Table(name = "PLATO")
 public class Plato {
   @Id
-  private String id;
+  private Integer id;
 
   private String nombre;
 
@@ -23,11 +23,11 @@ public class Plato {
   @JoinColumn(name = "CATEGORIA_PLATO_ID")
   private CategoriaPlato categoriaPlato;
 
-  public String getId() {
+  public Integer getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 
@@ -61,16 +61,5 @@ public class Plato {
 
   public void setCategoriaPlato(CategoriaPlato categoriaPlato) {
     this.categoriaPlato = categoriaPlato;
-  }
-
-  public static String generarIdPlato(List<Plato> listaPlato) {
-    if (listaPlato.isEmpty())
-      return "P-001";
-
-    String ultimoId = listaPlato.get(listaPlato.size() - 1).getId();
-
-    int numero = Integer.parseInt(String.join("", ultimoId.split("P-")));
-
-    return "P-" + String.format("%03d", numero + 1);
   }
 }

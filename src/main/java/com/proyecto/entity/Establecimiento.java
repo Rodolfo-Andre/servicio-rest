@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.*;
 @Entity
 @Table(name = "ESTABLECIMIENTO")
 public class Establecimiento {
-
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   private String nomEstablecimiento;
@@ -71,5 +69,4 @@ public class Establecimiento {
   public void setListaCaja(List<Caja> listaCaja) {
     this.listaCaja = listaCaja;
   }
-
 }

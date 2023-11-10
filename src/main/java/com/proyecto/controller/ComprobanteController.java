@@ -6,10 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import com.proyecto.entity.Comanda;
-import com.proyecto.entity.Comprobante;
-import com.proyecto.entity.EstadoComanda;
+import com.proyecto.entity.*;
 import com.proyecto.service.*;
 
 @RestController

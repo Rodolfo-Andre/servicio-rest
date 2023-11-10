@@ -15,7 +15,7 @@ public class CategoriaPlatoService {
     return categoriaPlatoRepository.findAll();
   }
 
-  public CategoriaPlato obtenerPorId(String c) {
+  public CategoriaPlato obtenerPorId(Integer c) {
     return categoriaPlatoRepository.findById(c).orElse(null);
   }
 
@@ -27,13 +27,11 @@ public class CategoriaPlatoService {
     categoriaPlatoRepository.save(c);
   }
 
-  public void eliminar(String id) {
+  public void eliminar(Integer id) {
     categoriaPlatoRepository.deleteById(id);
   }
 
   public long obtenerTamano() {
     return categoriaPlatoRepository.count();
   }
-
-  
 }

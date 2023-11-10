@@ -1,48 +1,43 @@
 package com.proyecto.controller;
 
-import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.proyecto.entity.CategoriaPlato;
 import com.proyecto.service.CategoriaPlatoService;
-import com.proyecto.service.EmpleadoService;
 
 @RestController
 @RequestMapping(value = "/configuracion/categoriaPlato")
 public class CategoriaPlatoController {
-	@Autowired
-	CategoriaPlatoService categoriaPlatoService;
+  @Autowired
+  CategoriaPlatoService categoriaPlatoService;
 
-	@PostMapping(value = "/registrar")
-	public void registrar(@RequestBody CategoriaPlato cate) {
+  @PostMapping(value = "/registrar")
+  public void registrar(@RequestBody CategoriaPlato cate) {
+    categoriaPlatoService.agregar(cate);
+  }
 
-		categoriaPlatoService.agregar(cate);
-	}
+  @PutMapping(value = "/actualizar")
+  public void actualizar(@RequestBody CategoriaPlato cate) {
+    categoriaPlatoService.actualizar(cate);
+  }
 
-	@PutMapping(value = "/actualizar")
-	public void actualizar(@RequestBody CategoriaPlato cate) {
-		categoriaPlatoService.actualizar(cate);
-	}
+  @DeleteMapping(value = "/eliminar/{codigo}")
+  public void eliminar(@PathVariable("codigo") Integer cod) {
+    categoriaPlatoService.eliminar(cod);
+  }
 
-	@DeleteMapping(value = "/eliminar/{codigo}")
-	public void eliminar(@PathVariable("codigo") String cod) {
-		categoriaPlatoService.eliminar(cod);
-	}
+  @Controller
+  @RequestMapping(value = "/configuracion/categoriaPlato")
+  class EmpleadoController {
+    @Autowired
+    CategoriaPlatoService categoriaPlatoService;
 
-	@Controller
-	@RequestMapping(value = "/configuracion/categoriaPlato")
-	class EmpleadoController {
-		@Autowired
-		CategoriaPlatoService categoriaPlatoService;
-
-		@GetMapping(value = "")
-		public String index(Model model) {
-			model.addAttribute("listaCategoriaPlato", categoriaPlatoService.obtenerTodo());
-			return "pages/categoria-plato";
-		}
-	}
-
+    @GetMapping(value = "")
+    public String index(Model model) {
+      model.addAttribute("listaCategoriaPlato", categoriaPlatoService.obtenerTodo());
+      return "pages/categoria-plato";
+    }
+  }
 }

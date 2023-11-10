@@ -4,7 +4,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import com.proyecto.entity.*;
 import com.proyecto.service.*;
@@ -26,9 +25,6 @@ public class DatabaseLoader implements CommandLineRunner {
   @Autowired
   private EstablecimientoService establecimientoService;
 
-  @Autowired
-  private PasswordEncoder passwordEncoder;
-
   @Override
   public void run(String... args) throws Exception {
     Date fechaActual = new Date();
@@ -38,6 +34,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
     if (establecimientoService.obtenerTamano() == 0) {
       Establecimiento establecimiento = new Establecimiento();
+      establecimiento.setId(1);
       establecimiento.setDireccionestablecimiento("Av.Izaguirre");
       establecimiento.setNomEstablecimiento("Sangunchería Wong");
       establecimiento.setTelefonoestablecimiento("942850902");
@@ -54,18 +51,18 @@ public class DatabaseLoader implements CommandLineRunner {
     }
 
     if (metodoPagoService.obtenerTamano() == 0) {
-      metodoPagoService.agregar(new MetodoPago("En efectivo"));
-      metodoPagoService.agregar(new MetodoPago("BCP"));
-      metodoPagoService.agregar(new MetodoPago("BBVA"));
-      metodoPagoService.agregar(new MetodoPago("Scotiabank"));
-      metodoPagoService.agregar(new MetodoPago("Interbank"));
+      metodoPagoService.agregar(new MetodoPago(1, "En efectivo"));
+      metodoPagoService.agregar(new MetodoPago(2, "BCP"));
+      metodoPagoService.agregar(new MetodoPago(3, "BBVA"));
+      metodoPagoService.agregar(new MetodoPago(4, "Scotiabank"));
+      metodoPagoService.agregar(new MetodoPago(5, "Interbank"));
     }
 
     if (categoriaPlatoService.obtenerTamano() == 0) {
-      categoriaPlatoService.agregar(new CategoriaPlato("C-001", "Bebidas"));
-      categoriaPlatoService.agregar(new CategoriaPlato("C-002", "Hamburguesas"));
-      categoriaPlatoService.agregar(new CategoriaPlato("C-003", "Postres"));
-      categoriaPlatoService.agregar(new CategoriaPlato("C-004", "Sopas"));
+      categoriaPlatoService.agregar(new CategoriaPlato(1, "Bebidas"));
+      categoriaPlatoService.agregar(new CategoriaPlato(2, "Hamburguesas"));
+      categoriaPlatoService.agregar(new CategoriaPlato(3, "Postres"));
+      categoriaPlatoService.agregar(new CategoriaPlato(5, "Sopas"));
     }
 
     if (estadoComandaService.obtenerTamano() == 0) {
@@ -82,10 +79,12 @@ public class DatabaseLoader implements CommandLineRunner {
       Cargo administrador = cargoService.obtenerPorNombre("ADMINISTRADOR");
 
       Usuario usuarioAdministrador = new Usuario();
+      usuarioAdministrador.setId(1);
       usuarioAdministrador.setCorreo("admin@admin.com");
-      usuarioAdministrador.setContrasena(passwordEncoder.encode("admin"));
+      usuarioAdministrador.setContrasena("admin");
 
       Empleado empleadoAdministrador = new Empleado();
+      empleadoAdministrador.setId(1);
       empleadoAdministrador.setNombre("Admin");
       empleadoAdministrador.setApellido("Admin");
       empleadoAdministrador.setDni("77777777");
@@ -104,10 +103,12 @@ public class DatabaseLoader implements CommandLineRunner {
       Cargo mesero = cargoService.obtenerPorNombre("MESERO");
 
       Usuario usuarioMesero = new Usuario();
+      usuarioMesero.setId(2);
       usuarioMesero.setCorreo("mesero@mesero.com");
-      usuarioMesero.setContrasena(passwordEncoder.encode("mesero"));
+      usuarioMesero.setContrasena("mesero");
 
       Empleado empleadoMesero = new Empleado();
+      empleadoMesero.setId(2);
       empleadoMesero.setNombre("Mesero");
       empleadoMesero.setApellido("Mesero");
       empleadoMesero.setDni("66666666");
@@ -124,10 +125,12 @@ public class DatabaseLoader implements CommandLineRunner {
       Cargo cajero = cargoService.obtenerPorNombre("CAJERO");
 
       Usuario usuarioCajero = new Usuario();
+      usuarioCajero.setId(3);
       usuarioCajero.setCorreo("cajero@cajero.com");
-      usuarioCajero.setContrasena(passwordEncoder.encode("cajero"));
+      usuarioCajero.setContrasena("cajero");
 
       Empleado empleadoCajero = new Empleado();
+      empleadoCajero.setId(3);
       empleadoCajero.setNombre("Cajero");
       empleadoCajero.setApellido("Cajero");
       empleadoCajero.setDni("55555555");
@@ -145,10 +148,12 @@ public class DatabaseLoader implements CommandLineRunner {
       Cargo gerente = cargoService.obtenerPorNombre("GERENTE");
 
       Usuario usuarioGerente = new Usuario();
+      usuarioGerente.setId(4);
       usuarioGerente.setCorreo("gerente@gerente.com");
-      usuarioGerente.setContrasena(passwordEncoder.encode("gerente"));
+      usuarioGerente.setContrasena("gerente");
 
       Empleado empleadoGerente = new Empleado();
+      empleadoGerente.setId(4);
       empleadoGerente.setNombre("Gerente");
       empleadoGerente.setApellido("Gerente");
       empleadoGerente.setDni("33333333");
@@ -160,7 +165,6 @@ public class DatabaseLoader implements CommandLineRunner {
       usuarioGerente.setEmpleado(empleadoGerente);
 
       usuarioService.agregar(usuarioGerente);
-
     }
   }
 }

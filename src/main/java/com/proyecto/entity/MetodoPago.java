@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.*;
 @Table(name = "METODO_PAGO")
 public class MetodoPago {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   private String nombreMetodoPago;
@@ -48,9 +47,8 @@ public class MetodoPago {
     this.nombreMetodoPago = metodo;
   }
 
-  public MetodoPago(String nombreMetodoPago) {
-    super();
+  public MetodoPago(Integer id, String nombreMetodoPago) {
+    this.id = id;
     this.nombreMetodoPago = nombreMetodoPago;
   }
-
 }

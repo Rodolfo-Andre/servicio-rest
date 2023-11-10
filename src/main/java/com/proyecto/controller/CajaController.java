@@ -15,26 +15,23 @@ class CajaRestController {
 
   @Autowired
   EstablecimientoService establecimientoService;
-  
-  
+
   @PostMapping(value = "/registrar")
-	public void registrar(@RequestBody Caja caja) {
-		cajaservice.agregar(caja);
-	}
+  public void registrar(@RequestBody Caja caja) {
+    cajaservice.agregar(caja);
+  }
 
-	@PutMapping(value = "/actualizar")
-	public void actualizar(@RequestBody Caja caja) {
-		cajaservice.actualizar(caja);
-		
-	}
+  @PutMapping(value = "/actualizar")
+  public void actualizar(@RequestBody Caja caja) {
+    cajaservice.actualizar(caja);
 
-	@DeleteMapping(value = "/eliminar/{codigo}")
-	public void eliminar(@PathVariable("codigo") String cod) {
-		cajaservice.eliminar(cod);
-	}
+  }
 
+  @DeleteMapping(value = "/eliminar/{codigo}")
+  public void eliminar(@PathVariable("codigo") Integer cod) {
+    cajaservice.eliminar(cod);
+  }
 }
-
 
 @Controller
 @RequestMapping(value = "/configuracion/caja")
@@ -48,5 +45,4 @@ class CajaController {
 
     return "pages/caja";
   }
-
 }

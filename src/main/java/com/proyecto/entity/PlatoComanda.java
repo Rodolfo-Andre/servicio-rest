@@ -1,19 +1,19 @@
 package com.proyecto.entity;
 
 public class PlatoComanda {
-  private String id;
+  private Integer id;
   private int cantidad;
   private String observacion;
 
   public PlatoComanda() {
   }
 
-  public PlatoComanda(String id, int cantidad) {
+  public PlatoComanda(Integer id, int cantidad) {
     this.id = id;
     this.cantidad = cantidad;
   }
 
-  public String getId() {
+  public Integer getId() {
     return this.id;
   }
 
@@ -21,7 +21,7 @@ public class PlatoComanda {
     return this.cantidad;
   }
 
-  public void setId(String id) {
+  public void setId(Integer id) {
     this.id = id;
   }
 

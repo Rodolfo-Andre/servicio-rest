@@ -7,7 +7,6 @@ import java.util.List;
 @Table(name = "COMANDA")
 public class Comanda {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   @Column(name = "CANTIDAD_ASIENTOS")

@@ -1,7 +1,6 @@
 package com.proyecto.service;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.proyecto.dao.EstablecimientoRepository;
@@ -21,9 +20,7 @@ public class EstablecimientoService {
   }
 
   public void actualizar(Establecimiento e) {
-
     establecimientoRepository.save(e);
-
   }
 
   public void eliminar(Integer id) {
@@ -36,6 +33,5 @@ public class EstablecimientoService {
 
   public Establecimiento obterporId(Integer id) {
     return establecimientoRepository.findById(id).orElse(null);
-
   }
 }

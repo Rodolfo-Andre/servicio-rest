@@ -23,7 +23,7 @@ public class DetalleComandaService {
     repository.deleteById(id);
   }
 
-  public DetalleComanda findByComandaId(int comandaId, String platoId) {
+  public DetalleComanda findByComandaId(int comandaId, Integer platoId) {
     return repository.findByPlatoComandaId(comandaId, platoId);
   }
 
@@ -31,7 +31,7 @@ public class DetalleComandaService {
     return repository.findByComandaId(comandaId);
   }
 
-  public DetalleComanda findDetalleComandaByPlatoIdAndComandaId(String platoId, int comandaId) {
+  public DetalleComanda findDetalleComandaByPlatoIdAndComandaId(Integer platoId, int comandaId) {
     return repository.findDetalleComandaByPlatoIdAndComandaId(platoId, comandaId);
   }
 

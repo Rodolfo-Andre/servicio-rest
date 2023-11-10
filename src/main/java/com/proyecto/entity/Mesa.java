@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 @Table(name = "MESA")
 public class Mesa {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   @Column(name = "CANTIDAD_ASIENTOS")

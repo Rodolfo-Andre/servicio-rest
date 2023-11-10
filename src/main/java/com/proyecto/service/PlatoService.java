@@ -15,12 +15,11 @@ public class PlatoService {
     return platoRepository.findAll();
   }
 
-  public Plato obtenerPorId(String p) {
+  public Plato obtenerPorId(Integer p) {
     return platoRepository.findById(p).orElse(null);
   }
 
   public void agregar(Plato p) {
-    p.setId(Plato.generarIdPlato(this.obtenerTodo()));
     platoRepository.save(p);
   }
 
@@ -28,11 +27,11 @@ public class PlatoService {
     platoRepository.save(p);
   }
 
-  public void eliminar(String id) {
+  public void eliminar(Integer id) {
     platoRepository.deleteById(id);
   }
 
-  public int obtenerTamanoDetalleComandaDePlato(String id) {
+  public int obtenerTamanoDetalleComandaDePlato(Integer id) {
     Plato plato = platoRepository.findById(id).orElse(null);
     int tamanoDetalleComanda = 0;
 
@@ -45,7 +44,7 @@ public class PlatoService {
     return tamanoDetalleComanda;
   }
 
-  public List<Plato> obtenerPlatoByCategoriId(String idCategoria) {
+  public List<Plato> obtenerPlatoByCategoriId(Integer idCategoria) {
     return platoRepository.findPlatoByCategoriaId(idCategoria);
   }
 }

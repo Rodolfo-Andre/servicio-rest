@@ -30,7 +30,7 @@ class PlatoRestController {
   }
 
   @DeleteMapping(value = "/eliminar/{codigo}")
-  public void eliminar(@PathVariable("codigo") String cod) {
+  public void eliminar(@PathVariable("codigo") Integer cod) {
     platoService.eliminar(cod);
   }
 }
@@ -45,7 +45,5 @@ class PlatoController {
   public String index(Model model) {
     model.addAttribute("listaPlato", platoService.obtenerTodo());
     return "pages/plato";
-
   }
-
 }

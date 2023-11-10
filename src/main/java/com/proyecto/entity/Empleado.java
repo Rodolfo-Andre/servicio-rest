@@ -9,7 +9,6 @@ import jakarta.persistence.*;
 @Table(name = "EMPLEADO")
 public class Empleado {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   private String nombre;
