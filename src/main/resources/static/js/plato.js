@@ -12,7 +12,7 @@ const initializeTable = () => {
     responsive: true,
     fixedHeader: true,
     rowId: "0",
-    columns: [null, null, { orderable: false, searchable: false }, null, null],
+    columns: [null, null, null, null],
     initComplete: function () {
       $("#tablaPlato thead tr th").each(function (i) {
         const title = $(this).text();
