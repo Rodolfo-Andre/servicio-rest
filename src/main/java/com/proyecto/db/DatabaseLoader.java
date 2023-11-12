@@ -58,12 +58,14 @@ public class DatabaseLoader implements CommandLineRunner {
       metodoPagoService.agregar(new MetodoPago(5, "Interbank"));
     }
 
-    if (categoriaPlatoService.obtenerTamano() == 0) {
-      categoriaPlatoService.agregar(new CategoriaPlato(1, "Bebidas"));
-      categoriaPlatoService.agregar(new CategoriaPlato(2, "Hamburguesas"));
-      categoriaPlatoService.agregar(new CategoriaPlato(3, "Postres"));
-      categoriaPlatoService.agregar(new CategoriaPlato(5, "Sopas"));
-    }
+    /*
+     * if (categoriaPlatoService.obtenerTamano() == 0) {
+     * categoriaPlatoService.agregar(new CategoriaPlato(1, "Bebidas"));
+     * categoriaPlatoService.agregar(new CategoriaPlato(2, "Hamburguesas"));
+     * categoriaPlatoService.agregar(new CategoriaPlato(3, "Postres"));
+     * categoriaPlatoService.agregar(new CategoriaPlato(4, "Sopas"));
+     * }
+     */
 
     if (estadoComandaService.obtenerTamano() == 0) {
       estadoComandaService.agregar(new EstadoComanda("Generado"));
