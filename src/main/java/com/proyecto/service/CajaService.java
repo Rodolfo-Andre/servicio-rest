@@ -30,4 +30,8 @@ public class CajaService {
   public void eliminar(Integer id) {
     cajarepository.deleteById(id);
   }
+
+  public long obtenerTamano() {
+    return cajarepository.count();
+  }
 }

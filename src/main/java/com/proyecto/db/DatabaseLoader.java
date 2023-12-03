@@ -16,14 +16,16 @@ public class DatabaseLoader implements CommandLineRunner {
   private CargoService cargoService;
   @Autowired
   private MetodoPagoService metodoPagoService;
-  @Autowired
-  private CategoriaPlatoService categoriaPlatoService;
+  // @Autowired
+  // private CategoriaPlatoService categoriaPlatoService;
   @Autowired
   private EstadoComandaService estadoComandaService;
   @Autowired
   private TipoComprobanteService tipoComprobanteService;
   @Autowired
   private EstablecimientoService establecimientoService;
+  @Autowired
+  private CajaService cajaService;
 
   @Override
   public void run(String... args) throws Exception {
@@ -41,6 +43,16 @@ public class DatabaseLoader implements CommandLineRunner {
       establecimiento.setRucestablecimiento("20217382809");
 
       establecimientoService.agregar(establecimiento);
+    }
+
+    if (cajaService.obtenerTamano() == 0) {
+      Caja caja = new Caja();
+      caja.setId(1);
+
+      Establecimiento establecimiento = new Establecimiento();
+      establecimiento.setId(1);
+
+      cajaService.agregar(caja);
     }
 
     if (cargoService.obtenerTamano() == 0) {
